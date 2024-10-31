@@ -15,7 +15,8 @@ import {
   ListCheck, 
   Menu,
   X,
-  LogOut
+  LogOut,
+  BringToFront 
 } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -46,6 +47,11 @@ export default function AdminSidebar() {
       title: "Нүүр хуудас",
       icon: <Home color="#000000" />,
       path: "https://www.taigatour.mn/",
+    },
+    {
+      title: "Захиалга",
+      icon: <BringToFront color="#000000" />,
+      path: "/book",
     },
     {
       title: "Аялал",
@@ -120,11 +126,11 @@ export default function AdminSidebar() {
 
         {/* Sidebar Navigation Links - Visible only when the sidebar is open */}
         {isSidebarOpen && (
-          <div className="flex flex-col bg-gray-100 mt-4">
+          <div className="flex flex-col bg-gray-100 mt-2">
             {navLinks.map((list, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 px-4 py-2 cursor-pointer"
+                className="flex items-center gap-2 px-4 py-1 cursor-pointer"
                 onClick={() => {
                   setIsSidebarOpen(false);
                   router.push(list.path);
@@ -155,7 +161,7 @@ export default function AdminSidebar() {
         <div
           className={`fixed top-0 z-50 h-screen bg-[#F8F8F8]  w-64 border-r border-[#E5E5E5] flex flex-col items-center`}
         >
-          <div className="flex items-center justify-between mb-10 ">
+          <div className="flex items-center justify-between mb-6 ">
             <img
               src={IMGURL + additional?.logo}
               alt="logo"
@@ -175,7 +181,7 @@ export default function AdminSidebar() {
               }}
             >
               <div
-                className={`w-12 h-12 rounded-lg border-[#E5E5E5] bg-white border my-2 flex items-center justify-center ${
+                className={`w-12 h-12 rounded-lg border-[#E5E5E5] bg-white border my-1 flex items-center justify-center ${
                   path.includes(list.path) ? "border-[#3749E5] font-bold" : ""
                 }`}
               >

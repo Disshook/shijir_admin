@@ -11,7 +11,7 @@ const SignInForm = () => {
     const user = JSON.parse(storageService.get(window, "user"));
 
     if ((token && user?.role == "admin") || user?.role == "operator") {
-      router.push("/travels");
+      router.push("/book");
     }
   });
   const [form, setForm] = useState({
@@ -94,7 +94,6 @@ const SignInForm = () => {
             >
               Нэвтрэх
             </button>
-            {/* yanlaad */}
           </div>
         </div>
       </div>

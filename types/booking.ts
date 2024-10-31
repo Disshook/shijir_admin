@@ -2,10 +2,16 @@ import { Travel } from "./travel";
 import { User } from "./user";
 
 export interface Booking {
-  user: User;
   _id: string;
-  status: boolean;
-  travel: Travel;
-  people: number;
-  createdAt: string;
+  name: string;
+  email: string;
+  startDate?: string; 
+  endDate?: string;   
+  phone?: string;     
+  content?: string;   
+  kidsNumber?: number; 
+  adultNumber?: number; 
+  status: number;    
+  people: number;     
+  createdAt: string;  
 }
