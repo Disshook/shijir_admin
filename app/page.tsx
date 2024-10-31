@@ -5,6 +5,7 @@ const Main = () => {
   // ChannelMergerNo
 
   redirect("/travels");
+  console.log("ghf");
   return <div></div>;
 };
 
