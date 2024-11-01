@@ -3,8 +3,6 @@ import TravelList from "@/views/travels/TravelList";
 import { Travel } from "@/types/travel";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Test from "@/views/travels/Pax";
-import Pax from "@/views/travels/Pax";
 
 export default function AdminTravelsPage() {
   const [travels, setTravels] = useState<Travel[]>([]);
