@@ -26,6 +26,10 @@ const Modal = dynamic(() => import("react-minimal-modal"), { ssr: false });
 interface Props {
   category: Category[];
 }
+interface Pax {
+  title: string;
+  price: string;
+}
 
 const EditTravelView = ({ category }: Props) => {
   const router = useRouter();
@@ -48,10 +52,8 @@ const EditTravelView = ({ category }: Props) => {
   const [formValues, setFormValues] = useState<
     Array<{ direction: string; program: string }>
   >([]);
-  const [paxCount, setPaxCount] = useState(2);
-  const [paxValues, setPaxValues] = useState(
-    Array.from({ length: paxCount }, () => "")
-  );
+  const [paxCount, setPaxCount] = useState<number>(1);
+  const [paxValues, setPaxValues] = useState<Pax[]>([{ title: "", price: "" }]);
   const [form, setForm] = useState({
     title: "",
     duration: "",
@@ -122,15 +124,31 @@ const EditTravelView = ({ category }: Props) => {
   };
 
   const handlePaxCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const count = Math.min(parseInt(e.target.value, 10), 5);
-    setPaxCount(count);
-    setPaxValues(Array.from({ length: count }, (_, i) => paxValues[i] || ""));
+    const newCount = Math.min(Math.max(parseInt(e.target.value, 10), 1), 5);
+    setPaxCount(newCount);
+
+    setPaxValues((prevValues) =>
+      Array.from(
+        { length: newCount },
+        (_, index) => prevValues[index] || { title: "", price: "" }
+      )
+    );
   };
 
-  const handlePaxValueChange = (index: number, value: string) => {
-    const updatedPaxValues = [...paxValues];
-    updatedPaxValues[index] = value;
-    setPaxValues(updatedPaxValues);
+  const handlePaxTitleChange = (index: number, value: string) => {
+    setPaxValues((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = { ...newValues[index], title: value };
+      return newValues;
+    });
+  };
+
+  const handlePaxPriceChange = (index: number, value: string) => {
+    setPaxValues((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = { ...newValues[index], price: value };
+      return newValues;
+    });
   };
 
   const onSubmit = () => {
@@ -482,7 +500,7 @@ const EditTravelView = ({ category }: Props) => {
                 <input
                   type="number"
                   min="1"
-                  max="5" // Max set to 5
+                  max="5"
                   value={paxCount}
                   onChange={handlePaxCountChange}
                   className="border py-2 text-xs px-4 rounded text-[#162c43]"
@@ -495,12 +513,26 @@ const EditTravelView = ({ category }: Props) => {
                   key={index}
                   className="flex flex-col gap-2 w-full lg:w-[25%] p-4"
                 >
-                  <span className="text-xs text-[#162c43]">Pax{index + 1}</span>
+                  <span className="text-xs text-[#162c43]">Pax</span>
+                  <input
+                    type="text"
+                    value={paxValues[index]?.title}
+                    onChange={(e) =>
+                      handlePaxTitleChange(index, e.target.value)
+                    }
+                    className="border py-2 text-xs px-4 rounded text-[#162c43]"
+                    placeholder="Enter Pax Title"
+                  />
+
+                  <span className="text-xs text-[#162c43]">
+                    {" "}
+                    Price per person
+                  </span>
                   <input
                     type="number"
-                    value={paxValues[index]}
+                    value={paxValues[index]?.price}
                     onChange={(e) =>
-                      handlePaxValueChange(index, e.target.value)
+                      handlePaxPriceChange(index, e.target.value)
                     }
                     className="border py-2 text-xs px-4 rounded text-[#162c43]"
                     placeholder="1'000'000MNT"
