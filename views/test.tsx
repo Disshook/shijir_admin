@@ -5,15 +5,34 @@ import Toggle from "react-toggle";
 import CategoryGallery from "@/components/(admin)/travels/CategoryGallery";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
 import { Travel } from "@/types/travel";
+import dynamic from "next/dynamic";
 import { Services } from "@/types/services";
 import { Destination } from "@/types/destination";
 
-const Froala = dynamic(() => import("@/components/(admin)/travels/Froala"), { ssr: false });
-const TravelGallery = dynamic(() => import("@/components/(admin)/travels/TravelGallery"), { ssr: false });
-const ImageUploader = dynamic(() => import("@/components/(admin)/travels/ImageUploader"), { ssr: false });
-const Modal = dynamic(() => import("react-minimal-modal"), { ssr: false });
+const Froala = dynamic(() => import("@/components/(admin)/travels/Froala"), {
+  ssr: false,
+});
+
+const TravelGallery = dynamic(
+  () => import("@/components/(admin)/travels/TravelGallery"),
+  {
+    ssr: false,
+  }
+);
+
+const ImageUploader = dynamic(
+  () => import("@/components/(admin)/travels/ImageUploader"),
+  {
+    ssr: false,
+  }
+);
+
+
+
+const Modal = dynamic(() => import("react-minimal-modal"), {
+  ssr: false,
+});
 
 interface Props {
   category: Category[];
@@ -23,71 +42,57 @@ const EditTravelView = ({ category }: Props) => {
   const router = useRouter();
   const { id } = useParams();
   const [language, setLanguage] = useState("en");
-  const [isSpecial, setIsSpecial] = useState(false);
-  const [single, setSingle] = useState<Travel | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [sliderCount, setSliderCount] = useState(0);
-  const [showSliders, setShowSliders] = useState(false);
-  const [editorValue, setEditorValue] = useState("");
+  const [isSpecial, setIsSpecial] = useState<boolean>(false);
+  const [single, setSingle] = useState<Travel>();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [sliderCount, setSliderCount] = useState<number>(0);
+  const [showSliders, setShowSliders] = useState<boolean>(false);
+  const [editorValue, setEditorValue] = useState<string>("");
   const [services, setServices] = useState<Services[]>([]);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [destination, setDestination] = useState<Destination[]>([]);
-  const [selectedDestination, setSelectedDestination] = useState("");
+  const [selectedServices, setSelectedServices] = useState<String[]>([]);
+  const [selectedDestination, setSelectedDestination] = useState<String>("");
   const [cover, setCover] = useState<File | null>(null);
   const [files, setFiles] = useState<File[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]); 
-  const [selectedCat, setSelectedCat] = useState(category[0]?._id || "");
+  const [selectedCat, setSelectedCat] = useState<string>(category[0]?._id!);
+  const [code, setCode] = useState("");
   const [formValues, setFormValues] = useState<Array<{ direction: string; program: string }>>([]);
-  const [paxCount, setPaxCount] = useState(2);
-  const [paxValues, setPaxValues] = useState(Array.from({ length: paxCount }, () => ""));
+  const [paxCount, setPaxCount] = useState(2); 
+  const [paxValues, setPaxValues] = useState(
+    Array.from({ length: paxCount }, () => "")
+  );
+
   const [form, setForm] = useState({
     title: "",
     duration: "",
-    price: "",
+    price: "", 
     category: "",
     sale: "",
   });
-  useEffect(() => {
-    axios
-      .get("https://taiga.tanuweb.cloud/api/v1/category")
-      .then((res) => setCategories(res.data.data))
-      .catch((er) => console.log(er));
-    axios
-      .get("https://taiga.tanuweb.cloud/api/v1/services")
-      .then((res) => setServices(res.data.data))
-      .catch((er) => console.log(er));
-    axios
-      .get("https://taiga.tanuweb.cloud/api/v1/destination")
-      .then((res) => setDestination(res.data.data))
-      .catch((er) => console.log(er));
-  }, []);
 
 
   useEffect(() => {
-    axios.get(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`)
-      .then((res) => {
-        const travelData = res.data.data;
-        
-        // Set initial values for form and states based on fetched data
-        setSingle(travelData);
-        setForm({
-          title: travelData.title || "",
-          duration: travelData.duration || "",
-          price: travelData.price || "",
-          sale: travelData.sale || "",
-          category: travelData.category || "",
-        });
-        setIsSpecial(travelData.isSpecial || false);
-        setEditorValue(travelData.description || "");
-        setSelectedCat(travelData.category || "");
-        setSelectedServices(travelData.services || []);
-        setSelectedDestination(travelData.destination || "");
-        setFormValues(travelData.days || []);
-        setPaxValues(travelData.pax || []);
-        setFiles(travelData.files || []);
-        setCover(travelData.cover || null);
-      })
-      .catch((error) => console.error("Error fetching travel data:", error));
+    axios.get(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`).then((res) => {
+      const travelData = res.data.data;
+      setSingle(travelData);
+      setForm({
+        title: travelData.title,
+        duration: travelData.duration,
+        price: travelData.price,
+        sale: travelData.sale,
+        category: travelData.category,
+      });
+      setIsSpecial(travelData.isSpecial);
+      setEditorValue(travelData.description);
+      setSelectedCat(travelData.category);
+      setCode(travelData.code || "");
+      setFormValues(travelData.days || []);
+      setSelectedServices(travelData.services || []);
+      setSelectedDestination(travelData.destination || []);
+      setPaxValues(travelData.pax || []);
+      setFiles(travelData.files || []);
+      setCover(travelData.cover || null);
+    });
   }, [id]);
 
   const handleToggle = () => setIsSpecial(!isSpecial);
@@ -99,9 +104,9 @@ const EditTravelView = ({ category }: Props) => {
 
   const handleEditorChange = (text: string) => setEditorValue(text);
 
-  const handleFileChange = (newFiles: File[]) => setFiles(newFiles);
+  const handleFileChange = (files: File[]) => setFiles(files);
 
-  const handleSingleFileChange = (newCover: File | null) => setCover(newCover);
+  const handleSingleFileChange = (file: File | null) => setCover(file);
 
   const handleSliderChange = (index: number, field: string, value: string) => {
     const updatedValues = [...formValues];
@@ -110,7 +115,7 @@ const EditTravelView = ({ category }: Props) => {
   };
 
   const handlePaxCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const count = Math.min(parseInt(e.target.value, 10), 5);
+    const count = Math.min(parseInt(e.target.value, 10), 5); 
     setPaxCount(count);
     setPaxValues(Array.from({ length: count }, (_, i) => paxValues[i] || ""));
   };
@@ -131,27 +136,28 @@ const EditTravelView = ({ category }: Props) => {
     formData.append("price", form.price);
     formData.append("category", selectedCat);
     formData.append("services", JSON.stringify(selectedServices));
-    formData.append("destination", selectedDestination);
+    formData.append("destination", selectedDestination as string);
+    formData.append("code", code.replace("allowfullscreen", "allowFullScreen"));
     formData.append("days", JSON.stringify(formValues));
     formData.append("pax", JSON.stringify(paxValues));
 
     files.forEach((file) => formData.append("files", file));
     if (cover) formData.append("cover", cover);
 
-    axios.put(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`, formData)
-      .then(() => {
-        alert("Travel updated successfully!");
+    axios
+      .put(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`, formData)
+      .then((res) => {
+        alert("Travel updated successfully !!");
         router.push("/travels");
       })
       .catch((error) => {
-        console.error("Error updating travel:", error.response?.data || error);
+        console.log(error.response?.data); // Check for additional details in the server error response
+        console.log(error);
       });
   };
 
-
   return (
     <>
-      {/* Modal for Itinerary */}
       <Modal open={isOpen} onOpenChange={setIsOpen} title="Хөтөлбөр засах" style={{ borderRadius: "5px" }}>
         <div className="w-full min-h-[500px] flex flex-col max-h-[500px] overflow-auto">
           {/* Slider Count Input */}
@@ -216,7 +222,7 @@ const EditTravelView = ({ category }: Props) => {
               </div>
             ))}
 
-          {/* Modal Buttons */}
+
           <div className="w-full flex items-center gap-2 justify-end pr-4">
             <div
               className="rounded text-xs text-red-500 bg-white border-red-500 border px-4 py-2 hover:bg-red-500 hover:text-white cursor-pointer"
@@ -282,7 +288,6 @@ const EditTravelView = ({ category }: Props) => {
               <span className="text-xs text-[#162c43]">Аялал оруулах хэл</span>
               <select
                 className="text-xs border rounded py-2 px-4 bg-white text-black"
-                value={language}
                 onChange={(e) => setLanguage(e.target.value)}
               >
                 <option value="en">Англи</option>
@@ -290,7 +295,7 @@ const EditTravelView = ({ category }: Props) => {
               </select>
             </div>
           </div>
-
+ 
           {/* Additional Information */}
           <div className="w-full border border-[#E5E5E5] flex flex-col rounded-lg bg-white">
             <div className="w-full px-4 py-4">
@@ -302,7 +307,7 @@ const EditTravelView = ({ category }: Props) => {
               <input
                 type="text"
                 name="duration"
-                value={form.duration} 
+                value={form.duration}
                 onChange={handleFormValue}
                 className="border py-2 text-xs px-4 rounded text-[#162c43] bg-white"
                 placeholder="2 өдөр 3 шөнө г.м"
@@ -315,10 +320,11 @@ const EditTravelView = ({ category }: Props) => {
               >
                 Хөтөлбөр оруулах
               </span>
+                </div>
             </div>
             <div className="flex flex-col gap-2  w-full p-4">
               <span className="text-xs text-[#162c43]">Үйлчилгээ</span>
-                <div className="w-full grid grid-cols-2 place-items-center gap-4">
+              <div className="w-full grid grid-cols-2 place-items-center gap-4">
                 {services?.map((list) => (
                   <div
                     className="flex items-center gap-4 w-full"
@@ -327,7 +333,6 @@ const EditTravelView = ({ category }: Props) => {
                     <input
                       id={list._id}
                       type="checkbox"
-                      checked={selectedServices.includes(list._id)} // Pre-select based on old data
                       onChange={(e) => {
                         if (e.target.checked) {
                           setSelectedServices([...selectedServices, list._id]);
@@ -337,11 +342,12 @@ const EditTravelView = ({ category }: Props) => {
                           );
                         }
                       }}
+                      value=""
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <label
                       htmlFor={list._id}
-                      className="text-xs text-[#162c43]"
+                      className=" text-xs text-[#162c43]"
                     >
                       {list.title}
                     </label>
@@ -369,7 +375,7 @@ const EditTravelView = ({ category }: Props) => {
               </div>
             </div>
           </div>
-          
+
           {/* Cover Image */}
           <div className="w-full border border-[#E5E5E5] flex flex-col rounded-lg bg-white">
             <div className="w-full px-4 py-4">
@@ -441,7 +447,7 @@ const EditTravelView = ({ category }: Props) => {
               </div>
             </div>
             <div className="w-full px-4 flex flex-wrap">
-            <div className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
+              <div className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
                 <span className="text-xs text-[#162c43]">Pax Count</span>
                 <input
                   type="number"
@@ -486,7 +492,6 @@ const EditTravelView = ({ category }: Props) => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

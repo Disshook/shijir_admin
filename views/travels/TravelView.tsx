@@ -84,7 +84,7 @@ const TravelView = () => {
   );
 
   const handlePaxCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const count = Math.min(parseInt(e.target.value, 10), 5); // Set max to 5
+    const count = Math.min(parseInt(e.target.value, 10), 5); 
     setPaxCount(count);
     setPaxValues(Array.from({ length: count }, (_, i) => paxValues[i] || ""));
   };
@@ -500,7 +500,7 @@ const TravelView = () => {
                     className="border py-2 text-xs px-4 rounded text-[#162c43]"
                     placeholder="1'000'000MNT"
                   />
-                </div>
+                </div> 
               ))}
             </div>
             <div className="flex gap-2 items-center w-full pb-4 px-8">
