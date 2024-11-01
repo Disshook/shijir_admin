@@ -12,3 +12,4 @@ export interface Travel {
   language: "en" | "mn" | "kr";
   days: any;
 }
+ 

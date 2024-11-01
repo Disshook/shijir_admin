@@ -18,6 +18,10 @@ const Modal = dynamic(() => import("react-minimal-modal"), { ssr: false });
 interface Props {
   category: Category[];
 }
+interface Pax {
+  title: string;
+  price: string;
+}
 
 const EditTravelView = ({ category }: Props) => {
   const router = useRouter();
@@ -38,8 +42,8 @@ const EditTravelView = ({ category }: Props) => {
   const [categories, setCategories] = useState<Category[]>([]); 
   const [selectedCat, setSelectedCat] = useState(category[0]?._id || "");
   const [formValues, setFormValues] = useState<Array<{ direction: string; program: string }>>([]);
-  const [paxCount, setPaxCount] = useState(2);
-  const [paxValues, setPaxValues] = useState(Array.from({ length: paxCount }, () => ""));
+  const [paxCount, setPaxCount] = useState<number>(1);
+  const [paxValues, setPaxValues] = useState<Pax[]>([{ title: "", price: "" }]);
   const [form, setForm] = useState({
     title: "",
     duration: "",
@@ -109,17 +113,32 @@ const EditTravelView = ({ category }: Props) => {
     setFormValues(updatedValues);
   };
 
+ 
   const handlePaxCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const count = Math.min(parseInt(e.target.value, 10), 5);
-    setPaxCount(count);
-    setPaxValues(Array.from({ length: count }, (_, i) => paxValues[i] || ""));
+    const newCount = Math.min(Math.max(parseInt(e.target.value, 10), 1), 5);
+    setPaxCount(newCount);
+
+    setPaxValues((prevValues) =>
+      Array.from({ length: newCount }, (_, index) => prevValues[index] || { title: "", price: "" })
+    );
   };
 
-  const handlePaxValueChange = (index: number, value: string) => {
-    const updatedPaxValues = [...paxValues];
-    updatedPaxValues[index] = value;
-    setPaxValues(updatedPaxValues);
+  const handlePaxTitleChange = (index: number, value: string) => {
+    setPaxValues((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = { ...newValues[index], title: value };
+      return newValues;
+    });
   };
+
+  const handlePaxPriceChange = (index: number, value: string) => {
+    setPaxValues((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = { ...newValues[index], price: value };
+      return newValues;
+    });
+  };
+
 
   const onSubmit = () => {
     const formData = new FormData();
@@ -243,6 +262,7 @@ const EditTravelView = ({ category }: Props) => {
           Илгээх
         </div>
       </div>
+
 
       <div className="flex flex-col lg:flex-row gap-4 w-full p-4 lg:p-10">
         {/* Left Panel */}
@@ -442,38 +462,47 @@ const EditTravelView = ({ category }: Props) => {
             </div>
             <div className="w-full px-4 flex flex-wrap">
             <div className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
-                <span className="text-xs text-[#162c43]">Pax Count</span>
-                <input
-                  type="number"
-                  min="1"
-                  max="5" // Max set to 5
-                  value={paxCount}
-                  onChange={handlePaxCountChange}
-                  className="border py-2 text-xs px-4 rounded text-[#162c43]"
-                  placeholder="Number of Pax fields"
-                />
-              </div>
+        <span className="text-xs text-[#162c43]">Pax Count</span>
+        <input
+          type="number"
+          min="1"
+          max="5"
+          value={paxCount}
+          onChange={handlePaxCountChange}
+          className="border py-2 text-xs px-4 rounded text-[#162c43]"
+          placeholder="Number of Pax fields"
+        />
+      </div>
 
-              {Array.from({ length: paxCount }).map((_, index) => (
-                <div key={index} className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
-                  <span className="text-xs text-[#162c43]">Pax{index + 1}</span>
-                  <input
-                    type="number"
-                    value={paxValues[index]}
-                    onChange={(e) => handlePaxValueChange(index, e.target.value)}
-                    className="border py-2 text-xs px-4 rounded text-[#162c43]"
-                    placeholder="1'000'000MNT"
-                  />
-                </div> 
-              ))}
+      {Array.from({ length: paxCount }).map((_, index) => (
+        <div key={index} className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
+          <span className="text-xs text-[#162c43]">Pax</span>
+          <input
+            type="text"
+            value={paxValues[index]?.title}
+            onChange={(e) => handlePaxTitleChange(index, e.target.value)}
+            className="border py-2 text-xs px-4 rounded text-[#162c43]"
+            placeholder="Enter Pax Title"
+          />
+
+          <span className="text-xs text-[#162c43]"> Price per person</span>
+          <input
+            type="number"
+            value={paxValues[index]?.price}
+            onChange={(e) => handlePaxPriceChange(index, e.target.value)}
+            className="border py-2 text-xs px-4 rounded text-[#162c43]"
+            placeholder="1'000'000MNT"
+          />
+        </div>
+      ))}
+            </div> 
+              <div className="flex gap-2 items-center w-full pb-4 px-8">
+                <CircleAlert color="#162c43" />
+                <span className="text-xs text-[#162c43] w-full">
+                  Хямдралгүй үед та 0 гэж оруулна уу
+                </span>
+              </div>
             </div>
-            <div className="flex gap-2 items-center w-full pb-4 px-8">
-              <CircleAlert color="#162c43" />
-              <span className="text-xs text-[#162c43] w-full">
-                Хямдралгүй үед та 0 гэж оруулна уу
-              </span>
-            </div>
-          </div>
 
           {/* Travel Description */}
           <div className="w-full border border-[#E5E5E5] flex flex-col rounded-lg bg-white">

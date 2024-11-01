@@ -43,6 +43,7 @@ const TravelView = () => {
   const [language, setLanguage] = useState("en");
   const [editorValue, setEditorValue] = useState<string>("");
   const [cover, setCover] = useState<File | null>(null);
+  const [photo, setPhoto] = useState<File | null>(null);
   const [files, setFiles] = useState<File[]>([]);
   const [selectedCat, setSelectedCat] = useState<string>(category[0]?._id!);
   const [code, setCode] = useState("");
@@ -78,20 +79,26 @@ const TravelView = () => {
     pax: [],
   });
 
-  const [paxCount, setPaxCount] = useState(2); 
-  const [paxValues, setPaxValues] = useState(
-    Array.from({ length: paxCount }, () => "")
+  const [paxCount, setPaxCount] = useState<number>(1);
+  const [paxValues, setPaxValues] = useState<{ title: string; price: string }[]>(
+    Array.from({ length: paxCount }, () => ({ title: "", price: "" }))
   );
 
   const handlePaxCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const count = Math.min(parseInt(e.target.value, 10), 5); 
+    const count = Math.min(Math.max(parseInt(e.target.value, 10), 1), 5);
     setPaxCount(count);
-    setPaxValues(Array.from({ length: count }, (_, i) => paxValues[i] || ""));
+    setPaxValues(Array.from({ length: count }, (_, index) => paxValues[index] || { title: "", price: "" }));
   };
 
-  const handlePaxValueChange = (index: number, value: string) => {
+  const handlePaxTitleChange = (index: number, value: string) => {
     const updatedPaxValues = [...paxValues];
-    updatedPaxValues[index] = value;
+    updatedPaxValues[index].title = value;
+    setPaxValues(updatedPaxValues);
+  };
+
+  const handlePaxPriceChange = (index: number, value: string) => {
+    const updatedPaxValues = [...paxValues];
+    updatedPaxValues[index].price = value;
     setPaxValues(updatedPaxValues);
   };
 
@@ -102,8 +109,6 @@ const TravelView = () => {
       [name]: value,
     });
   };
-
- 
 
   const handleEditorChange = (text: string) => {
     setEditorValue(text);
@@ -116,14 +121,25 @@ const TravelView = () => {
   const handleSingleFileChange = (file: File | null) => {
     setCover(file);
   };
-
-
+  // const handleSingleFileChange1 = (file: File | null, index: number) => {
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       // Update formValues with the photo URL at the correct index
+  //       handleInputChange(index, "photo", reader.result as string);
+  //     };
+  //     reader.readAsDataURL(file); // Convert file to a base64 URL
+  //   } else {
+  //     // If no file is selected, clear the photo field at the index
+  //     handleInputChange(index, "photo", "");
+  //   }
+  // };
+  
   const validateForm = () => {
     let errors = [];
     if (!form.title) errors.push("Аялалын нэр оруулах шаардлагатай.");
     if (!form.duration) errors.push("Хугацаа оруулах шаардлагатай.");
     if (!form.price || isNaN(Number(form.price))) errors.push("Үнэ оруулах шаардлагатай.");
-    if (paxValues.some((pax) => !pax || isNaN(Number(pax)))) errors.push("Pax үнэ оруулах шаардлагатай.");
     if (!editorValue) errors.push("Тайлбар оруулах шаардлагатай.");
     if (files.length < 5) errors.push("Та дор хаяж 5 зураг оруулна уу.");
     if (errors.length > 0) {
@@ -172,7 +188,7 @@ const TravelView = () => {
   const [showSliders, setShowSliders] = useState<boolean>(false);
   const [sliderCount, setSliderCount] = useState<number>(0);
   const [formValues, setFormValues] = useState(
-    Array.from({ length: sliderCount }, () => ({ direction: "", program: "" }))
+    Array.from({ length: sliderCount }, () => ({ direction: "", program: "" , photo :""}))
   );
   const handleInputChange = (index: number, field: string, value: string) => {
     const newValues = [...formValues];
@@ -182,7 +198,7 @@ const TravelView = () => {
     };
     setFormValues(newValues);
   };
-
+ 
   return (
     <>
       {/* Modal */}
@@ -231,7 +247,6 @@ const TravelView = () => {
                     placeholder="Чиглэл"
                   />
                 </div>
-
                 <div className="flex flex-col gap-2 w-full px-4 py-2">
                   <span className="text-xs text-[#162c43]">Хөтөлбөр</span>
                   <textarea
@@ -243,8 +258,25 @@ const TravelView = () => {
                     placeholder="Хөтөлбөр"
                   ></textarea>
                 </div>
+                {/* <div className="flex flex-col gap-2 w-full px-4 py-2">
+                  <span className="text-xs text-[#162c43]">Зураг оруулах</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleSingleFileChange1(e.target.files ? e.target.files[0] : null, index)}
+                    className="border py-2 px-6 rounded text-[#162c43]"
+                  />
+                  {formValues[index]?.photo && (
+                    <img
+                      src={formValues[index].photo}
+                      alt="Preview"
+                      className="w-full h-auto mt-2 rounded"
+                    />
+                  )}
+                </div> */}
+
               </div>
-            ))}
+            ))} 
 
           <div className="w-full flex items-center gap-2 justify-end pr-4">
             <div
@@ -254,6 +286,7 @@ const TravelView = () => {
                   Array.from({ length: sliderCount }, () => ({
                     direction: "",
                     program: "",
+                    photo: "",
                   }))
                 );
                 setIsOpen(false);
@@ -482,7 +515,7 @@ const TravelView = () => {
                 <input
                   type="number"
                   min="1"
-                  max="5" // Max set to 5
+                  max="5"
                   value={paxCount}
                   onChange={handlePaxCountChange}
                   className="border py-2 text-xs px-4 rounded text-[#162c43]"
@@ -492,17 +525,26 @@ const TravelView = () => {
 
               {Array.from({ length: paxCount }).map((_, index) => (
                 <div key={index} className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
-                  <span className="text-xs text-[#162c43]">Pax{index + 1}</span>
+                  <span className="text-xs text-[#162c43]">Pax</span>
+                  <input
+                    type="text"
+                    value={paxValues[index]?.title}
+                    onChange={(e) => handlePaxTitleChange(index, e.target.value)}
+                    className="border py-2 text-xs px-4 rounded text-[#162c43]"
+                    placeholder="Enter Pax "
+                  />
+                  <span className="text-xs text-[#162c43]">  Price per person</span>
                   <input
                     type="number"
-                    value={paxValues[index]}
-                    onChange={(e) => handlePaxValueChange(index, e.target.value)}
+                    value={paxValues[index]?.price}
+                    onChange={(e) => handlePaxPriceChange(index, e.target.value)}
                     className="border py-2 text-xs px-4 rounded text-[#162c43]"
                     placeholder="1'000'000MNT"
                   />
-                </div> 
+                </div>
               ))}
             </div>
+
             <div className="flex gap-2 items-center w-full pb-4 px-8">
               <CircleAlert color="#162c43" />
               <span className="text-xs text-[#162c43] w-full">
