@@ -6,7 +6,9 @@ import ImageUploader from "@/components/(admin)/travels/ImageUploader";
 import { useRouter, useParams } from "next/navigation";
 
 const TravelCategoryEditView = () => {
-  const [single, setSingle] = useState<{ name: string; photo: string } | null>(null);
+  const [single, setSingle] = useState<{ name: string; photo: string } | null>(
+    null
+  );
   const { id } = useParams();
   const router = useRouter();
   const [form, setForm] = useState({
@@ -30,7 +32,6 @@ const TravelCategoryEditView = () => {
     }
   }, [id]);
 
-  
   const handleFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setForm((prevForm) => ({
@@ -42,7 +43,7 @@ const TravelCategoryEditView = () => {
   const handleSingleFileChange = (file: File | null) => {
     setCover(file);
   };
- 
+
   const onSubmit = () => {
     const formData = new FormData();
     formData.append("name", form.name);
@@ -51,11 +52,12 @@ const TravelCategoryEditView = () => {
       formData.append("file", cover);
     }
 
-      axios
+    axios
       .put(`https://taiga.tanuweb.cloud/api/v1/category/${id}`, formData)
       .then((res) => {
         alert("category updated successfully!");
-        router.push("/travel-categories");})
+        router.push("/travel-categories");
+      })
       .catch((err) => console.error("Error updating category:", err));
   };
 

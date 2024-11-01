@@ -126,7 +126,10 @@ const EditDestinationView = () => {
                 </div>
                 <div className="flex flex-col gap-2 w-full lg:w-[100%] p-4">
                   <span className="text-xs text-[#162c43]">Мэдээлэл</span>
-                  <Froala value={editorValue} onValueChange={handleEditorChange} />
+                  <Froala
+                    value={editorValue}
+                    onValueChange={handleEditorChange}
+                  />
                 </div>
               </div>
             </div>

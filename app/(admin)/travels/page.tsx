@@ -13,7 +13,7 @@ export default function AdminTravelsPage() {
       .get("https://taiga.tanuweb.cloud/api/v1/travel")
       .then((res) => setTravels(res.data.data));
   }, []);
-   
+
   return (
     <>
       <TravelList travels={travels} />

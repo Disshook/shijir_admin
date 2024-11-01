@@ -46,7 +46,9 @@ const EditTravelView = ({ category }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
   const [selectedCat, setSelectedCat] = useState<string>(category[0]?._id!);
   const [code, setCode] = useState("");
-  const [formValues, setFormValues] = useState<Array<{ direction: string; program: string }>>([]);
+  const [formValues, setFormValues] = useState<
+    Array<{ direction: string; program: string }>
+  >([]);
 
   // Fetch travel details for editing
   useEffect(() => {
@@ -116,11 +118,13 @@ const EditTravelView = ({ category }: Props) => {
 
   return (
     <>
-
-   
-
       {/* Modal for Itinerary */}
-      <Modal open={isOpen} onOpenChange={setIsOpen} title="Хөтөлбөр засах" style={{ borderRadius: "5px" }}>
+      <Modal
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        title="Хөтөлбөр засах"
+        style={{ borderRadius: "5px" }}
+      >
         <div className="w-full min-h-[500px] flex flex-col max-h-[500px] overflow-auto">
           {/* Slider Count Input */}
           <div className="flex flex-col gap-2 w-full p-4">
@@ -134,7 +138,13 @@ const EditTravelView = ({ category }: Props) => {
                 setFormValues((prevValues) => {
                   // Adjust number of days in formValues based on slider count
                   if (newCount > prevValues.length) {
-                    return [...prevValues, ...Array(newCount - prevValues.length).fill({ direction: "", program: "" })];
+                    return [
+                      ...prevValues,
+                      ...Array(newCount - prevValues.length).fill({
+                        direction: "",
+                        program: "",
+                      }),
+                    ];
                   } else {
                     return prevValues.slice(0, newCount);
                   }
@@ -167,7 +177,9 @@ const EditTravelView = ({ category }: Props) => {
                   <input
                     type="text"
                     value={formValues[index]?.direction || ""}
-                    onChange={(e) => handleSliderChange(index, "direction", e.target.value)}
+                    onChange={(e) =>
+                      handleSliderChange(index, "direction", e.target.value)
+                    }
                     className="border py-4 text-xs px-6 rounded text-[#162c43]"
                     placeholder="Чиглэл"
                   />
@@ -176,7 +188,9 @@ const EditTravelView = ({ category }: Props) => {
                   <span className="text-xs text-[#162c43]">Хөтөлбөр</span>
                   <textarea
                     value={formValues[index]?.program || ""}
-                    onChange={(e) => handleSliderChange(index, "program", e.target.value)}
+                    onChange={(e) =>
+                      handleSliderChange(index, "program", e.target.value)
+                    }
                     className="border py-4 text-xs px-6 rounded text-[#162c43]"
                     placeholder="Хөтөлбөр"
                   ></textarea>
@@ -189,13 +203,21 @@ const EditTravelView = ({ category }: Props) => {
             <div
               className="rounded text-xs text-red-500 bg-white border-red-500 border px-4 py-2 hover:bg-red-500 hover:text-white cursor-pointer"
               onClick={() => {
-                setFormValues(Array.from({ length: sliderCount }, () => ({ direction: "", program: "" })));
+                setFormValues(
+                  Array.from({ length: sliderCount }, () => ({
+                    direction: "",
+                    program: "",
+                  }))
+                );
                 setIsOpen(false);
               }}
             >
               Болих
             </div>
-            <div className="rounded text-xs text-white bg-[#3749E5] px-4 py-2 cursor-pointer" onClick={() => setIsOpen(false)}>
+            <div
+              className="rounded text-xs text-white bg-[#3749E5] px-4 py-2 cursor-pointer"
+              onClick={() => setIsOpen(false)}
+            >
               Хадгалах
             </div>
           </div>
@@ -227,7 +249,8 @@ const EditTravelView = ({ category }: Props) => {
             <div className="flex gap-2 items-center w-full px-4">
               <CircleAlert color="#162c43" />
               <span className="text-xs text-[#162c43] w-full">
-                Та дор хаяж 5 зураг оруулна уу (Зурагын хэмжээ 5 mb - ээс хэтрэхгүй байх ёстой.)
+                Та дор хаяж 5 зураг оруулна уу (Зурагын хэмжээ 5 mb - ээс
+                хэтрэхгүй байх ёстой.)
               </span>
             </div>
           </div>

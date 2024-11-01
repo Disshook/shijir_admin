@@ -6,7 +6,7 @@ import Link from "next/link";
 
 interface Props {
   travels: Category[];
-} 
+}
 
 const CategoryList = ({ travels }: Props) => {
   const handleDelete = (id: string) => {

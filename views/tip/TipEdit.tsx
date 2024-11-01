@@ -9,7 +9,7 @@ import { useParams } from "next/navigation";
 const TipEditView = () => {
   const [single, setSingle] = useState(null);
   const { id } = useParams();
-  const router = useRouter(); 
+  const router = useRouter();
   const [form, setForm] = useState({
     title: "",
     subtitle: "",
@@ -66,7 +66,8 @@ const TipEditView = () => {
       .put(`https://taiga.tanuweb.cloud/api/v1/tip/${id}`, formData)
       .then((res) => {
         alert("Tip updated successfully!");
-        router.push("/tip");})
+        router.push("/tip");
+      })
       .catch((err) => console.error("Error updating tip:", err));
   };
 

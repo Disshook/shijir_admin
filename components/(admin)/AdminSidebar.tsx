@@ -12,11 +12,11 @@ import {
   Star,
   MessageCircleQuestion,
   MessageSquareMore,
-  ListCheck, 
+  ListCheck,
   Menu,
   X,
   LogOut,
-  BringToFront 
+  BringToFront,
 } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -167,7 +167,7 @@ export default function AdminSidebar() {
               alt="logo"
               className="rounded w-20 aspect-square object-cover"
             />
-              <h1 className="text-xl font-semibold mx-4">
+            <h1 className="text-xl font-semibold mx-4">
               {additional?.company || "Company Name"}
             </h1>
           </div>

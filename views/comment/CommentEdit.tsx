@@ -86,7 +86,9 @@ const CommentEditView = () => {
     <>
       {/* Header */}
       <div className="w-full border-b border-[#e5e5e5] h-20 bg-white flex items-center justify-between px-4 lg:px-10 top-0 z-0">
-        <span className="text-sm lg:text-lg text-[#162C43]">Сэтгэгдэл засах</span>
+        <span className="text-sm lg:text-lg text-[#162C43]">
+          Сэтгэгдэл засах
+        </span>
         <div
           className="px-4 py-2 rounded bg-[#3749E5] text-white text-xs lg:text-sm cursor-pointer hover:bg-opacity-80 transition-all duration-300"
           onClick={onSubmit}
@@ -133,7 +135,10 @@ const CommentEditView = () => {
             <div className="w-full">
               <div className="flex flex-col lg:flex-row w-full p-4">
                 <div className="flex flex-col gap-2 w-full lg:w-[50%] p-4">
-                  <label htmlFor="name" className="text-xs lg:text-sm text-[#162c43]">
+                  <label
+                    htmlFor="name"
+                    className="text-xs lg:text-sm text-[#162c43]"
+                  >
                     Нэр
                   </label>
                   <input
@@ -147,7 +152,10 @@ const CommentEditView = () => {
                 </div>
 
                 <div className="flex flex-col gap-2 w-full lg:w-[50%] p-4">
-                  <label htmlFor="comment" className="text-xs lg:text-sm text-[#162c43]">
+                  <label
+                    htmlFor="comment"
+                    className="text-xs lg:text-sm text-[#162c43]"
+                  >
                     Сэтгэгдэл
                   </label>
                   <input

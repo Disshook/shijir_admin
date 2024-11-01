@@ -25,7 +25,7 @@ const ServiceEditView = () => {
           setSingle(serviceData);
           setForm({
             title: serviceData.title,
-            photo: serviceData.file, 
+            photo: serviceData.file,
           });
         })
         .catch((err) => console.error("Error fetching service:", err));

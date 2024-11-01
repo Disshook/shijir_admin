@@ -7,7 +7,7 @@ export default async function AdminTravelCategoryPage() {
     const res = await fetch("https://taiga.tanuweb.cloud/api/v1/category", {
       cache: "no-store",
     });
- 
+
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.status}`);
     }

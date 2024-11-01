@@ -10,9 +10,17 @@ import { Travel } from "@/types/travel";
 import { Services } from "@/types/services";
 import { Destination } from "@/types/destination";
 
-const Froala = dynamic(() => import("@/components/(admin)/travels/Froala"), { ssr: false });
-const TravelGallery = dynamic(() => import("@/components/(admin)/travels/TravelGallery"), { ssr: false });
-const ImageUploader = dynamic(() => import("@/components/(admin)/travels/ImageUploader"), { ssr: false });
+const Froala = dynamic(() => import("@/components/(admin)/travels/Froala"), {
+  ssr: false,
+});
+const TravelGallery = dynamic(
+  () => import("@/components/(admin)/travels/TravelGallery"),
+  { ssr: false }
+);
+const ImageUploader = dynamic(
+  () => import("@/components/(admin)/travels/ImageUploader"),
+  { ssr: false }
+);
 const Modal = dynamic(() => import("react-minimal-modal"), { ssr: false });
 
 interface Props {
@@ -35,11 +43,15 @@ const EditTravelView = ({ category }: Props) => {
   const [selectedDestination, setSelectedDestination] = useState("");
   const [cover, setCover] = useState<File | null>(null);
   const [files, setFiles] = useState<File[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]); 
+  const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCat, setSelectedCat] = useState(category[0]?._id || "");
-  const [formValues, setFormValues] = useState<Array<{ direction: string; program: string }>>([]);
+  const [formValues, setFormValues] = useState<
+    Array<{ direction: string; program: string }>
+  >([]);
   const [paxCount, setPaxCount] = useState(2);
-  const [paxValues, setPaxValues] = useState(Array.from({ length: paxCount }, () => ""));
+  const [paxValues, setPaxValues] = useState(
+    Array.from({ length: paxCount }, () => "")
+  );
   const [form, setForm] = useState({
     title: "",
     duration: "",
@@ -62,12 +74,12 @@ const EditTravelView = ({ category }: Props) => {
       .catch((er) => console.log(er));
   }, []);
 
-
   useEffect(() => {
-    axios.get(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`)
+    axios
+      .get(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`)
       .then((res) => {
         const travelData = res.data.data;
-        
+
         // Set initial values for form and states based on fetched data
         setSingle(travelData);
         setForm({
@@ -138,7 +150,8 @@ const EditTravelView = ({ category }: Props) => {
     files.forEach((file) => formData.append("files", file));
     if (cover) formData.append("cover", cover);
 
-    axios.put(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`, formData)
+    axios
+      .put(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`, formData)
       .then(() => {
         alert("Travel updated successfully!");
         router.push("/travels");
@@ -148,11 +161,15 @@ const EditTravelView = ({ category }: Props) => {
       });
   };
 
-
   return (
     <>
       {/* Modal for Itinerary */}
-      <Modal open={isOpen} onOpenChange={setIsOpen} title="Хөтөлбөр засах" style={{ borderRadius: "5px" }}>
+      <Modal
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        title="Хөтөлбөр засах"
+        style={{ borderRadius: "5px" }}
+      >
         <div className="w-full min-h-[500px] flex flex-col max-h-[500px] overflow-auto">
           {/* Slider Count Input */}
           <div className="flex flex-col gap-2 w-full p-4">
@@ -166,7 +183,13 @@ const EditTravelView = ({ category }: Props) => {
                 setFormValues((prevValues) => {
                   // Adjust number of days in formValues based on slider count
                   if (newCount > prevValues.length) {
-                    return [...prevValues, ...Array(newCount - prevValues.length).fill({ direction: "", program: "" })];
+                    return [
+                      ...prevValues,
+                      ...Array(newCount - prevValues.length).fill({
+                        direction: "",
+                        program: "",
+                      }),
+                    ];
                   } else {
                     return prevValues.slice(0, newCount);
                   }
@@ -199,7 +222,9 @@ const EditTravelView = ({ category }: Props) => {
                   <input
                     type="text"
                     value={formValues[index]?.direction || ""}
-                    onChange={(e) => handleSliderChange(index, "direction", e.target.value)}
+                    onChange={(e) =>
+                      handleSliderChange(index, "direction", e.target.value)
+                    }
                     className="border py-4 text-xs px-6 rounded text-[#162c43]"
                     placeholder="Чиглэл"
                   />
@@ -208,7 +233,9 @@ const EditTravelView = ({ category }: Props) => {
                   <span className="text-xs text-[#162c43]">Хөтөлбөр</span>
                   <textarea
                     value={formValues[index]?.program || ""}
-                    onChange={(e) => handleSliderChange(index, "program", e.target.value)}
+                    onChange={(e) =>
+                      handleSliderChange(index, "program", e.target.value)
+                    }
                     className="border py-4 text-xs px-6 rounded text-[#162c43]"
                     placeholder="Хөтөлбөр"
                   ></textarea>
@@ -221,13 +248,21 @@ const EditTravelView = ({ category }: Props) => {
             <div
               className="rounded text-xs text-red-500 bg-white border-red-500 border px-4 py-2 hover:bg-red-500 hover:text-white cursor-pointer"
               onClick={() => {
-                setFormValues(Array.from({ length: sliderCount }, () => ({ direction: "", program: "" })));
+                setFormValues(
+                  Array.from({ length: sliderCount }, () => ({
+                    direction: "",
+                    program: "",
+                  }))
+                );
                 setIsOpen(false);
               }}
             >
               Болих
             </div>
-            <div className="rounded text-xs text-white bg-[#3749E5] px-4 py-2 cursor-pointer" onClick={() => setIsOpen(false)}>
+            <div
+              className="rounded text-xs text-white bg-[#3749E5] px-4 py-2 cursor-pointer"
+              onClick={() => setIsOpen(false)}
+            >
               Хадгалах
             </div>
           </div>
@@ -259,7 +294,8 @@ const EditTravelView = ({ category }: Props) => {
             <div className="flex gap-2 items-center w-full px-4">
               <CircleAlert color="#162c43" />
               <span className="text-xs text-[#162c43] w-full">
-                Та дор хаяж 5 зураг оруулна уу (Зурагын хэмжээ 5 mb - ээс хэтрэхгүй байх ёстой.)
+                Та дор хаяж 5 зураг оруулна уу (Зурагын хэмжээ 5 mb - ээс
+                хэтрэхгүй байх ёстой.)
               </span>
             </div>
           </div>
@@ -302,7 +338,7 @@ const EditTravelView = ({ category }: Props) => {
               <input
                 type="text"
                 name="duration"
-                value={form.duration} 
+                value={form.duration}
                 onChange={handleFormValue}
                 className="border py-2 text-xs px-4 rounded text-[#162c43] bg-white"
                 placeholder="2 өдөр 3 шөнө г.м"
@@ -318,7 +354,7 @@ const EditTravelView = ({ category }: Props) => {
             </div>
             <div className="flex flex-col gap-2  w-full p-4">
               <span className="text-xs text-[#162c43]">Үйлчилгээ</span>
-                <div className="w-full grid grid-cols-2 place-items-center gap-4">
+              <div className="w-full grid grid-cols-2 place-items-center gap-4">
                 {services?.map((list) => (
                   <div
                     className="flex items-center gap-4 w-full"
@@ -369,7 +405,7 @@ const EditTravelView = ({ category }: Props) => {
               </div>
             </div>
           </div>
-          
+
           {/* Cover Image */}
           <div className="w-full border border-[#E5E5E5] flex flex-col rounded-lg bg-white">
             <div className="w-full px-4 py-4">
@@ -441,7 +477,7 @@ const EditTravelView = ({ category }: Props) => {
               </div>
             </div>
             <div className="w-full px-4 flex flex-wrap">
-            <div className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
+              <div className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
                 <span className="text-xs text-[#162c43]">Pax Count</span>
                 <input
                   type="number"
@@ -455,16 +491,21 @@ const EditTravelView = ({ category }: Props) => {
               </div>
 
               {Array.from({ length: paxCount }).map((_, index) => (
-                <div key={index} className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
+                <div
+                  key={index}
+                  className="flex flex-col gap-2 w-full lg:w-[25%] p-4"
+                >
                   <span className="text-xs text-[#162c43]">Pax{index + 1}</span>
                   <input
                     type="number"
                     value={paxValues[index]}
-                    onChange={(e) => handlePaxValueChange(index, e.target.value)}
+                    onChange={(e) =>
+                      handlePaxValueChange(index, e.target.value)
+                    }
                     className="border py-2 text-xs px-4 rounded text-[#162c43]"
                     placeholder="1'000'000MNT"
                   />
-                </div> 
+                </div>
               ))}
             </div>
             <div className="flex gap-2 items-center w-full pb-4 px-8">

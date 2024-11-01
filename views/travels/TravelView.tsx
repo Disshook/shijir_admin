@@ -78,13 +78,13 @@ const TravelView = () => {
     pax: [],
   });
 
-  const [paxCount, setPaxCount] = useState(2); 
+  const [paxCount, setPaxCount] = useState(2);
   const [paxValues, setPaxValues] = useState(
     Array.from({ length: paxCount }, () => "")
   );
 
   const handlePaxCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const count = Math.min(parseInt(e.target.value, 10), 5); 
+    const count = Math.min(parseInt(e.target.value, 10), 5);
     setPaxCount(count);
     setPaxValues(Array.from({ length: count }, (_, i) => paxValues[i] || ""));
   };
@@ -103,8 +103,6 @@ const TravelView = () => {
     });
   };
 
- 
-
   const handleEditorChange = (text: string) => {
     setEditorValue(text);
   };
@@ -117,23 +115,23 @@ const TravelView = () => {
     setCover(file);
   };
 
-
   const validateForm = () => {
     let errors = [];
     if (!form.title) errors.push("Аялалын нэр оруулах шаардлагатай.");
     if (!form.duration) errors.push("Хугацаа оруулах шаардлагатай.");
-    if (!form.price || isNaN(Number(form.price))) errors.push("Үнэ оруулах шаардлагатай.");
-    if (paxValues.some((pax) => !pax || isNaN(Number(pax)))) errors.push("Pax үнэ оруулах шаардлагатай.");
+    if (!form.price || isNaN(Number(form.price)))
+      errors.push("Үнэ оруулах шаардлагатай.");
+    if (paxValues.some((pax) => !pax || isNaN(Number(pax))))
+      errors.push("Pax үнэ оруулах шаардлагатай.");
     if (!editorValue) errors.push("Тайлбар оруулах шаардлагатай.");
     if (files.length < 5) errors.push("Та дор хаяж 5 зураг оруулна уу.");
     if (errors.length > 0) {
-        alert("Дараах алдаануудыг засна уу:\n" + errors.join("\n"));
-        return false;
+      alert("Дараах алдаануудыг засна уу:\n" + errors.join("\n"));
+      return false;
     }
     return true;
   };
 
-  
   const onSubmit = () => {
     if (!validateForm()) return;
     setIsLoading(true);
@@ -283,7 +281,7 @@ const TravelView = () => {
         >
           {isLoading ? <Spinner /> : "Илгээх"}
         </div>
-      </div> 
+      </div>
       <div className="flex flex-col lg:flex-row gap-4 w-full p-4 lg:p-10">
         <div className="w-full lg:w-[30%] flex flex-col gap-4">
           <div className="w-full border border-[#E5E5E5] flex flex-col rounded-lg bg-white pb-4">
@@ -491,16 +489,21 @@ const TravelView = () => {
               </div>
 
               {Array.from({ length: paxCount }).map((_, index) => (
-                <div key={index} className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
+                <div
+                  key={index}
+                  className="flex flex-col gap-2 w-full lg:w-[25%] p-4"
+                >
                   <span className="text-xs text-[#162c43]">Pax{index + 1}</span>
                   <input
                     type="number"
                     value={paxValues[index]}
-                    onChange={(e) => handlePaxValueChange(index, e.target.value)}
+                    onChange={(e) =>
+                      handlePaxValueChange(index, e.target.value)
+                    }
                     className="border py-2 text-xs px-4 rounded text-[#162c43]"
                     placeholder="1'000'000MNT"
                   />
-                </div> 
+                </div>
               ))}
             </div>
             <div className="flex gap-2 items-center w-full pb-4 px-8">
