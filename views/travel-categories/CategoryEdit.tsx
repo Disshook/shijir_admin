@@ -42,17 +42,20 @@ const TravelCategoryEditView = () => {
   const handleSingleFileChange = (file: File | null) => {
     setCover(file);
   };
-
+ 
   const onSubmit = () => {
     const formData = new FormData();
     formData.append("name", form.name);
+
     if (cover) {
       formData.append("file", cover);
     }
 
-    axios
+      axios
       .put(`https://taiga.tanuweb.cloud/api/v1/category/${id}`, formData)
-      .then(() => router.push("/travel-categories"))
+      .then((res) => {
+        alert("category updated successfully!");
+        router.push("/travel-categories");})
       .catch((err) => console.error("Error updating category:", err));
   };
 
@@ -81,7 +84,7 @@ const TravelCategoryEditView = () => {
             <div className="w-full">
               {form.photo ? (
                 <img
-                  src={`https://taiga.tanuweb.cloud/uploads/${form.photo}`}
+                  src={"https://taiga.tanuweb.cloud/uploads/" + form.photo}
                   alt="Аялалын төрөл"
                   className="w-full aspect-square"
                 />
