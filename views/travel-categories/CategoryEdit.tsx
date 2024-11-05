@@ -20,7 +20,7 @@ const TravelCategoryEditView = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`https://taiga.tanuweb.cloud/api/v1/category/${id}`)
+        .get(`http://localhost:8001/api/v1/category/${id}`)
         .then((res) => {
           setSingle(res.data.data);
           setForm({
@@ -53,7 +53,7 @@ const TravelCategoryEditView = () => {
     }
 
     axios
-      .put(`https://taiga.tanuweb.cloud/api/v1/category/${id}`, formData)
+      .put(`http://localhost:8001/api/v1/category/${id}`, formData)
       .then((res) => {
         alert("category updated successfully!");
         router.push("/travel-categories");
@@ -86,7 +86,7 @@ const TravelCategoryEditView = () => {
             <div className="w-full">
               {form.photo ? (
                 <img
-                  src={"https://taiga.tanuweb.cloud/uploads/" + form.photo}
+                  src={"http://localhost:8001/uploads/" + form.photo}
                   alt="Аялалын төрөл"
                   className="w-full aspect-square"
                 />

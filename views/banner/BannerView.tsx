@@ -14,7 +14,7 @@ const BannerList = ({ banner }: Props) => {
     if (typeof window !== undefined) {
       if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
         axios
-          .delete("https://taiga.tanuweb.cloud/api/v1/banner/" + id)
+          .delete("http://localhost:8001/api/v1/banner/" + id)
           .then(() => {
             alert("Амжилттай устгагдлаа");
             window.location.reload();
@@ -77,7 +77,7 @@ const BannerList = ({ banner }: Props) => {
               </div>
 
               <img
-                src={"https://taiga.tanuweb.cloud/uploads/" + list.file}
+                src={"http://localhost:8001/uploads/" + list.file}
                 className="w-full h-auto object-cover aspect-video z-0"
                 alt=""
               />

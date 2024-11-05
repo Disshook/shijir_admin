@@ -14,7 +14,7 @@ const FaqsEdit = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`https://taiga.tanuweb.cloud/api/v1/faq/${id}`)
+        .get(`http://localhost:8001/api/v1/faq/${id}`)
         .then((res) => {
           setForm({
             question: res.data.data.question || "",
@@ -43,7 +43,7 @@ const FaqsEdit = () => {
   const onSubmit = async () => {
     setSubmitting(true);
     try {
-      await axios.put(`https://taiga.tanuweb.cloud/api/v1/faq/${id}`, {
+      await axios.put(`http://localhost:8001/api/v1/faq/${id}`, {
         question: form.question,
         answer: form.answer,
       });

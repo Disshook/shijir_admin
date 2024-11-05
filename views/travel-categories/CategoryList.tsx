@@ -13,7 +13,7 @@ const CategoryList = ({ travels }: Props) => {
     if (typeof window !== undefined) {
       if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
         axios
-          .delete("https://taiga.tanuweb.cloud/api/v1/category/" + id)
+          .delete("http://localhost:8001/api/v1/category/" + id)
           .then(() => {
             alert("Амжилттай устгагдлаа");
             window.location.reload();
@@ -74,9 +74,7 @@ const CategoryList = ({ travels }: Props) => {
                     <td className="py-4">
                       <div className="flex gap-2 items-center">
                         <img
-                          src={
-                            "https://taiga.tanuweb.cloud/uploads/" + list?.photo
-                          }
+                          src={"http://localhost:8001/uploads/" + list?.photo}
                           alt=""
                           className="w-8 aspect-square bg-[#CEEEEE] rounded"
                         />

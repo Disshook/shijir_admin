@@ -1,2 +1,2 @@
-const IMGURL = "https://taiga.tanuweb.cloud/uploads/";
+const IMGURL = "http://localhost:8001/uploads/";
 export default IMGURL;

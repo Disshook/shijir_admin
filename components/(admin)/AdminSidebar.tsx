@@ -30,9 +30,7 @@ export default function AdminSidebar() {
   useEffect(() => {
     const fetchAdditional = async () => {
       try {
-        const res = await axios.get(
-          "https://taiga.tanuweb.cloud/api/v1/additional"
-        );
+        const res = await axios.get("http://localhost:8001/api/v1/additional");
         setAdditional(res.data.data);
       } catch (error) {
         console.error("Error fetching additional data:", error);

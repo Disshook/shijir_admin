@@ -40,7 +40,7 @@ const TravelCategoryAdd = () => {
     }
 
     axios
-      .post("https://taiga.tanuweb.cloud/api/v1/category", formData)
+      .post("http://localhost:8001/api/v1/category", formData)
       .then(() => {
         alert("Амжилттай");
         router.push("/travel-categories");

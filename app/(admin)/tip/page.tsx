@@ -7,7 +7,7 @@ export default async function AdminTipPage() {
   let tips = [];
 
   try {
-    const res = await fetch("https://taiga.tanuweb.cloud/api/v1/tip", {
+    const res = await fetch("http://localhost:8001/api/v1/tip", {
       cache: "no-store",
     });
 
