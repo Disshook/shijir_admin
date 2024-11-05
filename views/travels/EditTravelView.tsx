@@ -184,7 +184,7 @@ const EditTravelView = ({ category }: Props) => {
   };
 
   return (
-    <>
+    <>    
       {/* Modal for Itinerary */}
       <Modal
         open={isOpen}
