@@ -4,7 +4,7 @@ export default async function EditTravelsPage() {
   let travels: Category[] = [];
 
   try {
-    const res = await fetch("https://taiga.tanuweb.cloud/api/v1/category", {
+    const res = await fetch("http://localhost:8001/api/v1/category", {
       cache: "no-store",
     });
 

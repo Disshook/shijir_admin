@@ -8,7 +8,7 @@ export default function AdminTravelsPage() {
   const [travels, setTravels] = useState<Travel[]>([]);
   useEffect(() => {
     axios
-      .get("https://taiga.tanuweb.cloud/api/v1/travel")
+      .get("http://localhost:8001/api/v1/travel")
       .then((res) => setTravels(res.data.data));
   }, []);
   //fhgf

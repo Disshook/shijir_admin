@@ -19,7 +19,7 @@ const BannerEditView = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`https://taiga.tanuweb.cloud/api/v1/banner/${id}`)
+        .get(`http://localhost:8001/api/v1/banner/${id}`)
         .then((res) => {
           const bannerData = res.data.data;
           setSingle(bannerData);
@@ -61,7 +61,7 @@ const BannerEditView = () => {
     }
 
     axios
-      .put(`https://taiga.tanuweb.cloud/api/v1/banner/${id}`, formData)
+      .put(`http://localhost:8001/api/v1/banner/${id}`, formData)
       .then(() => {
         alert("Banner updated successfully!");
         router.push("/banner");
@@ -95,7 +95,7 @@ const BannerEditView = () => {
             <div className="w-full">
               {form.photo ? (
                 <img
-                  src={"https://taiga.tanuweb.cloud/uploads/" + form.photo}
+                  src={"http://localhost:8001/uploads/" + form.photo}
                   alt="Banner"
                   className="w-full aspect-square object-cover"
                 />

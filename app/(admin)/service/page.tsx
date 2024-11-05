@@ -4,7 +4,7 @@ export default async function AdminServicePage() {
   let service = [];
 
   try {
-    const res = await fetch("https://taiga.tanuweb.cloud/api/v1/services", {
+    const res = await fetch("http://localhost:8001/api/v1/services", {
       cache: "no-store",
     });
 

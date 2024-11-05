@@ -38,7 +38,7 @@ const AdditionalView = ({ additional }: Props) => {
     });
 
     axios
-      .put(`https://taiga.tanuweb.cloud/api/v1/additional/update`, formData)
+      .put(`http://localhost:8001/api/v1/additional/update`, formData)
       .then(() => {
         alert("Амжилттай хадгалагдлаа");
         if (typeof window !== "undefined") {

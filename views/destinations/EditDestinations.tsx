@@ -23,7 +23,7 @@ const EditDestinationView = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`https://taiga.tanuweb.cloud/api/v1/destination/${id}`)
+        .get(`http://localhost:8001/api/v1/destination/${id}`)
         .then((res) => {
           const data = res.data.data;
           setSingle(data);
@@ -64,7 +64,7 @@ const EditDestinationView = () => {
     }
 
     axios
-      .put(`https://taiga.tanuweb.cloud/api/v1/destination/${id}`, formData)
+      .put(`http://localhost:8001/api/v1/destination/${id}`, formData)
       .then(() => router.push("/destinations"))
       .catch((err) => console.error("Error updating destination:", err));
   };
@@ -93,7 +93,7 @@ const EditDestinationView = () => {
             <div className="w-full">
               {form.photo ? (
                 <img
-                  src={`https://taiga.tanuweb.cloud/uploads/${form.photo}`}
+                  src={`http://localhost:8001/uploads/${form.photo}`}
                   alt="destination"
                   className="w-full aspect-square"
                 />

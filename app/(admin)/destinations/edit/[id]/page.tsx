@@ -5,7 +5,7 @@ export default async function EditDestinationPage() {
   let destinations: Category1[] = [];
 
   try {
-    const res = await fetch("https://taiga.tanuweb.cloud/api/v1/destination", {
+    const res = await fetch("http://localhost:8001/api/v1/destination", {
       cache: "no-store",
     });
 

@@ -19,7 +19,7 @@ const CommentEditView = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`https://taiga.tanuweb.cloud/api/v1/comment/${id}`)
+        .get(`http://localhost:8001/api/v1/comment/${id}`)
         .then((res) => {
           const commentData = res.data.data;
           setSingle(commentData);
@@ -63,7 +63,7 @@ const CommentEditView = () => {
     }
 
     axios
-      .put(`https://taiga.tanuweb.cloud/api/v1/comment/${id}`, formData)
+      .put(`http://localhost:8001/api/v1/comment/${id}`, formData)
       .then(() => {
         alert("Сэтгэгдэл амжилттай шинэчлэгдлээ!");
         router.push("/comment");
@@ -109,7 +109,7 @@ const CommentEditView = () => {
             <div className="w-full">
               {form.photo && !cover ? (
                 <img
-                  src={`https://taiga.tanuweb.cloud/uploads/${form.photo}`}
+                  src={`http://localhost:8001/uploads/${form.photo}`}
                   alt="Comment"
                   className="w-full aspect-square object-cover"
                 />

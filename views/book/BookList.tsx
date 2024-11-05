@@ -14,7 +14,7 @@ const BookList = ({ bookings }: Props) => {
     if (typeof window !== undefined) {
       if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
         axios
-          .delete("https://taiga.tanuweb.cloud/api/v1/booking/" + id)
+          .delete("http://localhost:8001/api/v1/booking/" + id)
           .then(() => {
             alert("Амжилттай устгагдлаа");
             window.location.reload();

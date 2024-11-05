@@ -49,7 +49,7 @@ export default function CategoryGallery({
             }}
           >
             <img
-              src={"https://taiga.tanuweb.cloud/uploads/" + list.photo}
+              src={"http://localhost:8001/uploads/" + list.photo}
               alt=""
               className="w-16 h-16 object-cover"
             />

@@ -16,7 +16,7 @@ const FaqsList = ({ faqs }: Props) => {
   const handleDelete = async (id: string) => {
     if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
       try {
-        await axios.delete(`https://taiga.tanuweb.cloud/api/v1/faq/${id}`);
+        await axios.delete(`http://localhost:8001/api/v1/faq/${id}`);
         alert("Амжилттай устгагдлаа");
         setFaqsList((prev) => prev.filter((item) => item._id !== id));
       } catch (error) {

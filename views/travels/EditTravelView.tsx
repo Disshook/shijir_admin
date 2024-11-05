@@ -64,22 +64,22 @@ const EditTravelView = ({ category }: Props) => {
   });
   useEffect(() => {
     axios
-      .get("https://taiga.tanuweb.cloud/api/v1/category")
+      .get("http://localhost:8001/api/v1/category")
       .then((res) => setCategories(res.data.data))
       .catch((er) => console.log(er));
     axios
-      .get("https://taiga.tanuweb.cloud/api/v1/services")
+      .get("http://localhost:8001/api/v1/services")
       .then((res) => setServices(res.data.data))
       .catch((er) => console.log(er));
     axios
-      .get("https://taiga.tanuweb.cloud/api/v1/destination")
+      .get("http://localhost:8001/api/v1/destination")
       .then((res) => setDestination(res.data.data))
       .catch((er) => console.log(er));
   }, []);
 
   useEffect(() => {
     axios
-      .get(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`)
+      .get(`http://localhost:8001/api/v1/travel/${id}`)
       .then((res) => {
         const travelData = res.data.data;
 
@@ -172,7 +172,7 @@ const EditTravelView = ({ category }: Props) => {
     if (cover) formData.append("cover", cover);
 
     axios
-      .put(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`, formData)
+      .put(`http://localhost:8001/api/v1/travel/${id}`, formData)
       .then(() => {
         alert("Travel updated successfully!");
         router.push("/travels");

@@ -39,7 +39,7 @@ const AddBanner = () => {
     }
 
     axios
-      .post("https://taiga.tanuweb.cloud/api/v1/banner", formData)
+      .post("http://localhost:8001/api/v1/banner", formData)
       .then(() => {
         alert("Баннерыг амжилттай нэмлээ!");
         router.push("/banner");

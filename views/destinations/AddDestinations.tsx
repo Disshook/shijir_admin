@@ -59,7 +59,7 @@ const DestinationAdd = () => {
     }
 
     axios
-      .post("https://taiga.tanuweb.cloud/api/v1/destination", formData)
+      .post("http://localhost:8001/api/v1/destination", formData)
       .then((res) => {
         alert("Амжилттай");
         router.push("/destinations");
