@@ -71,7 +71,7 @@ const EditTravelView = ({ category }: Props) => {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:8001/api/v1/travel/${id}`).then((res) => {
+    axios.get(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`).then((res) => {
       const travelData = res.data.data;
       setSingle(travelData);
       setForm({
@@ -144,7 +144,7 @@ const EditTravelView = ({ category }: Props) => {
     if (cover) formData.append("cover", cover);
 
     axios
-      .put(`http://localhost:8001/api/v1/travel/${id}`, formData)
+      .put(`https://taiga.tanuweb.cloud/api/v1/travel/${id}`, formData)
       .then((res) => {
         alert("Travel updated successfully !!");
         router.push("/travels");

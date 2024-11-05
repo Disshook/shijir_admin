@@ -35,7 +35,7 @@ const ServiceAddView = () => {
     }
 
     axios
-      .post("http://localhost:8001/api/v1/services", formData)
+      .post("https://taiga.tanuweb.cloud/api/v1/services", formData)
       .then((res) => {
         alert("Амжилттай");
         router.push("/service");

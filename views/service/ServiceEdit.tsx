@@ -19,7 +19,7 @@ const ServiceEditView = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:8001/api/v1/services/${id}`)
+        .get(`https://taiga.tanuweb.cloud/api/v1/services/${id}`)
         .then((res) => {
           const serviceData = res.data.data;
           setSingle(serviceData);
@@ -55,7 +55,7 @@ const ServiceEditView = () => {
       formData.append("file", cover);
     }
     axios
-      .put(`http://localhost:8001/api/v1/services/${id}`, formData)
+      .put(`https://taiga.tanuweb.cloud/api/v1/services/${id}`, formData)
       .then((res) => {
         alert("Service updated successfully!");
         router.push("/service");
@@ -90,7 +90,7 @@ const ServiceEditView = () => {
             <div className="w-full">
               {form.photo ? (
                 <img
-                  src={"http://localhost:8001/uploads/" + form.photo}
+                  src={"https://taiga.tanuweb.cloud/uploads/" + form.photo}
                   alt="Service"
                   className="w-full aspect-square object-cover"
                 />
