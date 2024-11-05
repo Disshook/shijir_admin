@@ -6,7 +6,7 @@ const AdditionalPage = async () => {
   let add: Additional | null = null;
 
   try {
-    const res = await fetch("http://localhost:8001/api/v1/additional", {
+    const res = await fetch("https://taiga.tanuweb.cloud/api/v1/additional", {
       cache: "no-store",
     });
 

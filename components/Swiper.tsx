@@ -27,7 +27,7 @@ const SwiperComponent = ({ banner }: Props) => {
               className="flex justify-center items-center w-full h-full bg-cover bg-center"
               style={{
                 backgroundImage: `url('${
-                  "http://localhost:8001/uploads/" + list.file
+                  "https://taiga.tanuweb.cloud/uploads/" + list.file
                 }')`,
               }}
             >

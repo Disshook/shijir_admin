@@ -9,7 +9,7 @@ export default function AdminDestinationsPage() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8001/api/v1/destination")
+      .get("https://taiga.tanuweb.cloud/api/v1/destination")
       .then((res) => setDestinations(res.data.data));
   }, []);
 

@@ -22,7 +22,7 @@ const FaqsAdd = () => {
     setError("");
 
     try {
-      await axios.post("http://localhost:8001/api/v1/faq", {
+      await axios.post("https://taiga.tanuweb.cloud/api/v1/faq", {
         question,
         answer,
       });

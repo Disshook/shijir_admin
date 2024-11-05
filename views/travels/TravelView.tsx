@@ -50,15 +50,15 @@ const TravelView = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8001/api/v1/category")
+      .get("https://taiga.tanuweb.cloud/api/v1/category")
       .then((res) => setCategory(res.data.data))
       .catch((er) => console.log(er));
     axios
-      .get("http://localhost:8001/api/v1/services")
+      .get("https://taiga.tanuweb.cloud/api/v1/services")
       .then((res) => setServices(res.data.data))
       .catch((er) => console.log(er));
     axios
-      .get("http://localhost:8001/api/v1/destination")
+      .get("https://taiga.tanuweb.cloud/api/v1/destination")
       .then((res) => {
         setDestination(res.data.data);
         setSelectedDestination(res.data.data[0]._id);
@@ -186,7 +186,7 @@ const TravelView = () => {
     }
 
     axios
-      .post("http://localhost:8001/api/v1/travel", formData)
+      .post("https://taiga.tanuweb.cloud/api/v1/travel", formData)
       .then((res) => {
         alert("Амжилттай");
         router.push("/travels");

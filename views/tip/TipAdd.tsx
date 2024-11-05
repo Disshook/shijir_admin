@@ -37,7 +37,7 @@ const TipAddView = () => {
     }
 
     axios
-      .post("http://localhost:8001/api/v1/tip", formData)
+      .post("https://taiga.tanuweb.cloud/api/v1/tip", formData)
       .then((res) => {
         alert("Амжилттай");
         router.push("/tip/");

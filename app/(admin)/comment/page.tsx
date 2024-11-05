@@ -4,7 +4,7 @@ export default async function AdminCommentPage() {
   let comments = [];
 
   try {
-    const res = await fetch("http://localhost:8001/api/v1/comment", {
+    const res = await fetch("https://taiga.tanuweb.cloud/api/v1/comment", {
       cache: "no-store",
     });
 

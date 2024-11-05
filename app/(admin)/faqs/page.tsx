@@ -4,7 +4,7 @@ export default async function AdminFaqPage() {
   let faqs = [];
 
   try {
-    const res = await fetch("http://localhost:8001/api/v1/faq", {
+    const res = await fetch("https://taiga.tanuweb.cloud/api/v1/faq", {
       cache: "no-store",
     });
 
