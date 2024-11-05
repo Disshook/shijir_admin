@@ -9,6 +9,7 @@ const ServiceAddView = () => {
   const router = useRouter();
   const [form, setForm] = useState<any>({
     title: "",
+    description: "",
     language: "en",
   });
 
@@ -29,13 +30,14 @@ const ServiceAddView = () => {
   const onSubmit = () => {
     const formData = new FormData();
     formData.append("title", form.title);
+    formData.append("description", form.description);
 
     if (cover) {
       formData.append("file", cover);
     }
 
     axios
-      .post("https://taiga.tanuweb.cloud/api/v1/services", formData)
+      .post("https://taiga.tanuweb.cloud/api/v1/services/", formData)
       .then((res) => {
         alert("Амжилттай");
         router.push("/service");
@@ -100,6 +102,19 @@ const ServiceAddView = () => {
                     type="text"
                     name="title"
                     value={form.title}
+                    onChange={handleFormValue}
+                    className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] w-full"
+                    placeholder="Мэдээлэл г.м"
+                  />
+                </div>
+                <div className="w-full lg:w-[50%]">
+                  <span className="text-xs lg:text-sm text-[#162c43]">
+                    Үйлчилгээний тайлбар
+                  </span>
+                  <input
+                    type="text"
+                    name="description"
+                    value={form.description}
                     onChange={handleFormValue}
                     className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] w-full"
                     placeholder="Мэдээлэл г.м"

@@ -13,6 +13,7 @@ const ServiceEditView = () => {
   const [form, setForm] = useState({
     title: "",
     photo: "",
+    description: "",
   });
 
   // Fetch data once when the component mounts or when 'id' changes
@@ -25,6 +26,7 @@ const ServiceEditView = () => {
           setSingle(serviceData);
           setForm({
             title: serviceData.title,
+            description: serviceData.description,
             photo: serviceData.file,
           });
         })
@@ -126,6 +128,18 @@ const ServiceEditView = () => {
                     type="text"
                     name="title"
                     value={form.title}
+                    onChange={handleFormValue}
+                    className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] bg-white"
+                  />
+                </div>
+                <div className="flex flex-col gap-2 w-full lg:w-[50%] p-4">
+                  <span className="text-xs lg:text-sm text-[#162c43]">
+                    Үйлчилгээ тайлбар
+                  </span>
+                  <input
+                    type="text"
+                    name="description"
+                    value={form.description}
                     onChange={handleFormValue}
                     className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] bg-white"
                   />

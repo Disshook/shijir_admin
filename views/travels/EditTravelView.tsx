@@ -57,6 +57,7 @@ const EditTravelView = ({ category }: Props) => {
   const [form, setForm] = useState({
     title: "",
     duration: "",
+    information: "",
     price: "",
     category: "",
     sale: "",
@@ -87,6 +88,7 @@ const EditTravelView = ({ category }: Props) => {
         setForm({
           title: travelData.title || "",
           duration: travelData.duration || "",
+          information: travelData.information || "",
           price: travelData.price || "",
           sale: travelData.sale || "",
           category: travelData.category || "",
@@ -154,6 +156,7 @@ const EditTravelView = ({ category }: Props) => {
   const onSubmit = () => {
     const formData = new FormData();
     formData.append("title", form.title);
+    formData.append("information", form.information);
     formData.append("duration", form.duration);
     formData.append("description", editorValue);
     formData.append("sale", form.sale);
@@ -357,6 +360,17 @@ const EditTravelView = ({ category }: Props) => {
                 type="text"
                 name="duration"
                 value={form.duration}
+                onChange={handleFormValue}
+                className="border py-2 text-xs px-4 rounded text-[#162c43] bg-white"
+                placeholder="2 өдөр 3 шөнө г.м"
+              />
+            </div>
+            <div className="flex flex-col gap-2 w-full p-4">
+              <span className="text-xs text-[#162c43]">Нэмэлт мэдээлэл</span>
+              <input
+                type="text"
+                name="information"
+                value={form.information}
                 onChange={handleFormValue}
                 className="border py-2 text-xs px-4 rounded text-[#162c43] bg-white"
                 placeholder="2 өдөр 3 шөнө г.м"

@@ -74,6 +74,7 @@ const TravelView = () => {
 
   const [form, setForm] = useState({
     title: "",
+    information: "",
     duration: "",
     price: "",
     category: "",
@@ -166,6 +167,7 @@ const TravelView = () => {
     formData.append("title", form.title);
     formData.append("duration", form.duration);
     formData.append("description", editorValue);
+    formData.append("information", form.information);
     formData.append("sale", form.sale);
     formData.append("isSpecial", JSON.stringify(isSpecial));
     formData.append("services", JSON.stringify(selectedServices));
@@ -386,6 +388,17 @@ const TravelView = () => {
                 onChange={handleFormValue}
                 className="border py-2 text-xs px-4 rounded text-[#162c43]"
                 placeholder="2 өдөр 3 шөнө г.м"
+              />
+            </div>
+            <div className="flex flex-col gap-2 w-full lg:w-[100%] p-4">
+              <span className="text-xs text-[#162c43]">Нэмэлт мэдээлэл</span>
+              <input
+                type="text"
+                name="information"
+                value={form.information}
+                onChange={handleFormValue}
+                className="border py-2 text-xs px-4 rounded text-[#162c43]"
+                placeholder="Нэмэлт мэдээлэл оруулна уу"
               />
             </div>
             <div className="flex p-4 w-full">

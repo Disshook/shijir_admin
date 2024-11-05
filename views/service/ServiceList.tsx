@@ -61,7 +61,7 @@ const ServiceList = ({ service }: Props) => {
                   Үйлчилгээний нэр
                 </th>
                 <th className="w-[20%] text-start py-4 px-2 text-xs lg:text-sm font-light">
-                  Үйлчилгээний хэл
+                  Үйлчилгээний тайлбар
                 </th>
                 <th className="w-[30%] text-start py-4 px-2 text-xs lg:text-sm font-light">
                   Үйлдэл
@@ -94,6 +94,7 @@ const ServiceList = ({ service }: Props) => {
                       : list.language === "kr"
                       ? "Солонгос"
                       : "Монгол"}
+                    {list.description}
                   </td>
                   <td>
                     <div className="flex items-center gap-4">
