@@ -11,5 +11,7 @@ export interface Travel {
   createdAt: string;
   language: "en" | "mn" | "kr";
   days: any;
+  pax: any;
+  date:any;
 }
  
