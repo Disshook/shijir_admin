@@ -1,0 +1,219 @@
+.elementor-127886 .elementor-element.elementor-element-c88b3cb > .elementor-container{max-width:1050px;}/* Start custom CSS for shortcode, class: .elementor-element-2be2ff9 */#navigation-menu-column .learning-and-support-menu {
+  position: absolute;
+  top: 100%;
+  bottom: 0;
+  z-index: 10;
+  margin-top: -2px;
+}
+#navigation-menu-column li:nth-child(2) .wpr-sub-mega-menu .elementor-widget-wrap {
+    padding: 10px 0px 10px 0px;
+}
+#navigation-menu-column .learning-and-support-menu .learning-and-support-items {
+  position: relative;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 12px rgba(30, 41, 59, 0.2);
+  border: 1px solid #ddd;
+}
+#navigation-menu-column .learning-and-support-menu .hidden {
+    display: none !important;
+}
+#navigation-menu-column .learning-and-support-menu .learning-and-support-items h4 {
+  display: none;
+}
+#navigation-menu-column .learning-and-support-menu .learning-and-support-items .content {
+  padding: 30px;
+  position: relative;
+  transform: none;
+  left: unset;
+  top:unset;
+}
+#navigation-menu-column .learning-and-support-menu .sf-icon-arrow-right::before {
+  font-size: 18px;
+  margin-left: 5px;
+}
+#navigation-menu-column .learning-and-support-menu .sf-icon-arrow-right {
+    font-size: 18px;
+}
+#navigation-menu-column .learning-and-support-menu .content .product-items-footer {
+    padding: 27.66px 24px;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .content .product-items-footer {
+    padding: 20px 24px;
+}
+#navigation-menu-column .wpr-nav-menu-container .learning-and-support-menu .navbar a .sf-icon-chevron-right-small {
+  display: none;
+}
+#navigation-menu-column .wpr-nav-menu-container .learning-and-support-menu .products-navigation-bar {
+  display: none;
+}
+#navigation-menu-column .learning-and-support-menu .navbar {
+  background-color: #F8FAFC;
+  overflow: hidden;
+  display: flex;
+  align-items: end;
+  border-radius: 0px;
+  border-bottom: 1.5px solid #E2E8F0;
+  margin: 0px;
+}
+#navigation-menu-column .learning-and-support-menu .navbar a {
+  float: left;
+  color: #0F172A;
+  font-size: 14px;
+  font-weight: 600;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0px 17px;
+  text-align: center;
+  padding: 10px 20px !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+#navigation-menu-column .learning-and-support-menu .navbar a:hover {
+  color: #0057FF !important;
+}
+#navigation-menu-column .learning-and-support-menu .navbar a.active {
+  color: #0057FF;
+}
+#navigation-menu-column .learning-and-support-menu .navbar a.active .active-border {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-radius: 2px;
+  height: 4px;
+  background-color: #0057ff;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu {
+    position: unset;
+    width: auto;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .learning-and-support-items {
+    margin: 0px;
+}
+@media (max-height: 550px) and (max-width: 992px) {
+  #navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .learning-and-support-items .content {
+    overflow-y: auto !important;
+  }
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .learning-and-support-items .content {
+    animation: slideInRight 0.3s forwards;
+    height: auto;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    display: block;
+    bottom: 0px;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    z-index: 1000;
+    padding: 0px !important;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .learning-and-support-items .content h4 {
+    display: block;
+    color: #0F172A;
+    font-size: 18px !important;
+    line-height: 30px;
+    padding: 15px 25px;
+    font-weight: 600;
+    margin: 0px;
+    text-transform: capitalize;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .learning-and-support-items .content .platform-grid {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 0px;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+    overflow-y: auto;
+    padding: 0px 0px 10px 0px;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .learning-and-support-items .content .platform-grid .platform-item {
+    padding: 12px 35px;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .products-navigation-bar {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 15px;
+    background-color: #1a1a1a;
+    justify-content: space-between;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .products-navigation-bar .menu-back-button {
+    display: inline-block;
+    width: 12px;
+    background-size: cover;
+    height: 18px;
+    color: #fff;
+    margin-top: -4px;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .products-navigation-bar .menu-close-button {
+    display: inline-block;
+    width: 25px;
+    background-size: cover;
+    height: 25px;
+    color: #fff;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .navbar {
+    display: block;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .navbar a {
+    flex-direction: row;
+    align-items: center;
+    margin: 0px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    padding: 0px 0px 0px 10px;
+    border-bottom: 1px solid #E2E8F0;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .navbar a .sf-icon-chevron-right-small {
+    display: block;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .navbar a.active {
+    color: #0F172A;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .navbar a.active .active-border {
+    display: none;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu {
+    transform: none !important;
+     margin-top: 0;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .navbar a .sf-icon-chevron-right-small {
+    margin-left: 5px;
+    margin-top: 1px;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .platform-grid .platform-item .platform-details{
+    line-height: 10px;
+}
+#navigation-menu-column .learning-and-support-menu .platform-grid {
+    -moz-column-gap: 24px;
+    column-gap: 24px;
+    row-gap: 24px;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .navbar a {
+    padding-left: 32px !important;
+}
+#navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .platform-details .control-description {
+    margin-top: 2px;
+}
+#navigation-menu-column .wpr-nav-menu-container .learning-and-support-menu .platform-item {
+    padding: 18px 12px;
+}
+#navigation-menu-column .wpr-nav-menu-container .learning-and-support-menu .platform-details .control-description {
+    margin-top: 5px;
+}
+@media (max-width:350px) {
+    #navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .content .product-items-footer {
+    padding: 20px 8px;
+    align-items: center;
+}
+}
+@media (max-height: 600px) and (max-width: 1200px) {
+  #navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu .content {
+    overflow-y: auto !important;
+  }
+  #navigation-menu-column .wpr-mobile-nav-menu-container .learning-and-support-menu #support-menu-footer {
+    position: static !important;
+  }
+}/* End custom CSS */
