@@ -81,6 +81,7 @@ const TravelView = () => {
     sale: "",
     days: [],
     pax: [],
+    date: [],
   });
 
   const [paxCount, setPaxCount] = useState<number>(1);
@@ -109,6 +110,27 @@ const TravelView = () => {
     const updatedPaxValues = [...paxValues];
     updatedPaxValues[index].price = value;
     setPaxValues(updatedPaxValues);
+  };
+  const [dateCount, setDateCount] = useState<number>(1);
+  const [dateValues, setDateValues] = useState<{ title: string }[]>(
+    Array.from({ length: dateCount }, () => ({ title: "" }))
+  );
+
+  const handleDateCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const count = Math.min(Math.max(parseInt(e.target.value, 10), 1), 5);
+    setDateCount(count);
+    setDateValues(
+      Array.from(
+        { length: count },
+        (_, index) => dateValues[index] || { title: "" }
+      )
+    );
+  };
+
+  const handleDateTitleChange = (index: number, value: string) => {
+    const updatedDateValues = [...dateValues];
+    updatedDateValues[index].title = value;
+    setDateValues(updatedDateValues);
   };
 
   const handleFormValue = (e: any) => {
@@ -176,6 +198,7 @@ const TravelView = () => {
     formData.append("category", selectedCat);
     formData.append("language", language);
     formData.append("pax", JSON.stringify(paxValues));
+    formData.append("date", JSON.stringify(dateValues));
     formData.append("days", JSON.stringify(formValues));
     files.forEach((file: any) => {
       formData.append("files", file);
@@ -186,7 +209,7 @@ const TravelView = () => {
     }
 
     axios
-      .post("https://taiga.tanuweb.cloud/api/v1/travel", formData)
+      .post("https://taiga.tanuweb.cloud/api/v1/travel/", formData)
       .then((res) => {
         alert("Амжилттай");
         router.push("/travels");
@@ -578,7 +601,38 @@ const TravelView = () => {
                 </div>
               ))}
             </div>
+            <div className="w-full px-4 flex flex-wrap">
+              <div className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
+                <span className="text-xs text-[#162c43]">Date Count</span>
+                <input
+                  type="number"
+                  min="1"
+                  max="5"
+                  value={dateCount}
+                  onChange={handleDateCountChange}
+                  className="border py-2 text-xs px-4 rounded text-[#162c43]"
+                  placeholder="Number of date fields"
+                />
+              </div>
 
+              {Array.from({ length: dateCount }).map((_, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col gap-2 w-full lg:w-[25%] p-4"
+                >
+                  <span className="text-xs text-[#162c43]">Date</span>
+                  <input
+                    type="text"
+                    value={dateValues[index]?.title}
+                    onChange={(e) =>
+                      handleDateTitleChange(index, e.target.value)
+                    }
+                    className="border py-2 text-xs px-4 rounded text-[#162c43]"
+                    placeholder="Enter Date"
+                  />
+                </div>
+              ))}
+            </div>
             <div className="flex gap-2 items-center w-full pb-4 px-8">
               <CircleAlert color="#162c43" />
               <span className="text-xs text-[#162c43] w-full">
