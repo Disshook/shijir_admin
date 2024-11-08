@@ -31,6 +31,7 @@ const TravelCategoryEditView = () => {
         .catch((err) => console.error("Error fetching category data:", err));
     }
   }, [id]);
+  //fgfd
 
   const handleFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
