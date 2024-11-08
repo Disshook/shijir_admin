@@ -10,7 +10,6 @@ import { Travel } from "@/types/travel";
 import { Services } from "@/types/services";
 import { Destination } from "@/types/destination";
 
-
 const Froala = dynamic(() => import("@/components/(admin)/travels/Froala"), {
   ssr: false,
 });
@@ -30,6 +29,9 @@ interface Props {
 interface Pax {
   title: string;
   price: string;
+}
+interface Date {
+  title: string;
 }
 
 const EditTravelView = ({ category }: Props) => {
@@ -55,6 +57,8 @@ const EditTravelView = ({ category }: Props) => {
   >([]);
   const [paxCount, setPaxCount] = useState<number>(1);
   const [paxValues, setPaxValues] = useState<Pax[]>([{ title: "", price: "" }]);
+  const [dateCount, setDateCount] = useState<number>(1);
+  const [dateValues, setDateValues] = useState<Date[]>([{ title: "" }]);
   const [form, setForm] = useState({
     title: "",
     duration: "",
@@ -101,6 +105,7 @@ const EditTravelView = ({ category }: Props) => {
         setSelectedDestination(travelData.destination || "");
         setFormValues(travelData.days || []);
         setPaxValues(travelData.pax || []);
+        setDateValues(travelData.date || []);
         setFiles(travelData.files || []);
         setCover(travelData.cover || null);
       })
@@ -137,9 +142,27 @@ const EditTravelView = ({ category }: Props) => {
       )
     );
   };
+  const handleDateCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCount = Math.min(Math.max(parseInt(e.target.value, 10), 1), 5);
+    setDateCount(newCount);
 
+    setDateValues((prevValues) =>
+      Array.from(
+        { length: newCount },
+        (_, index) => prevValues[index] || { title: "" }
+      )
+    );
+  };
+
+  const handleDateTitleChange = (index: number, value: string) => {
+    setDateValues((prevValues) => {
+      const newValues = [...prevValues];
+      newValues[index] = { ...newValues[index], title: value };
+      return newValues;
+    });
+  };
   const handlePaxTitleChange = (index: number, value: string) => {
-    setPaxValues((prevValues) => {
+    setDateValues((prevValues) => {
       const newValues = [...prevValues];
       newValues[index] = { ...newValues[index], title: value };
       return newValues;
@@ -168,6 +191,7 @@ const EditTravelView = ({ category }: Props) => {
     formData.append("destination", selectedDestination);
     formData.append("days", JSON.stringify(formValues));
     formData.append("pax", JSON.stringify(paxValues));
+    formData.append("date", JSON.stringify(dateValues));
 
     files.forEach((file) => formData.append("files", file));
     if (cover) formData.append("cover", cover);
@@ -184,7 +208,7 @@ const EditTravelView = ({ category }: Props) => {
   };
 
   return (
-    <>    
+    <>
       {/* Modal for Itinerary */}
       <Modal
         open={isOpen}
@@ -551,6 +575,38 @@ const EditTravelView = ({ category }: Props) => {
                     }
                     className="border py-2 text-xs px-4 rounded text-[#162c43]"
                     placeholder="1'000'000MNT"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="w-full px-4 flex flex-wrap">
+              <div className="flex flex-col gap-2 w-full lg:w-[25%] p-4">
+                <span className="text-xs text-[#162c43]">Date Count</span>
+                <input
+                  type="number"
+                  min="1"
+                  max="5"
+                  value={dateCount}
+                  onChange={handleDateCountChange}
+                  className="border py-2 text-xs px-4 rounded text-[#162c43]"
+                  placeholder="Number of Date fields"
+                />
+              </div>
+
+              {Array.from({ length: dateCount }).map((_, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col gap-2 w-full lg:w-[25%] p-4"
+                >
+                  <span className="text-xs text-[#162c43]">Date</span>
+                  <input
+                    type="text"
+                    value={dateValues[index]?.title}
+                    onChange={(e) =>
+                      handleDateTitleChange(index, e.target.value)
+                    }
+                    className="border py-2 text-xs px-4 rounded text-[#162c43]"
+                    placeholder="Enter Date Title"
                   />
                 </div>
               ))}

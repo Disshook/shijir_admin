@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { CircleAlert } from "lucide-react";
+import { CircleAlert, Trash } from "lucide-react";
 import axios from "axios";
 import ImageUploader from "@/components/(admin)/travels/ImageUploader";
 import { useRouter, useParams } from "next/navigation";
@@ -11,7 +11,7 @@ const TravelCategoryEditView = () => {
   );
   const { id } = useParams();
   const router = useRouter();
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<any>({
     name: "",
     photo: "",
   });
@@ -34,7 +34,7 @@ const TravelCategoryEditView = () => {
 
   const handleFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setForm((prevForm) => ({
+    setForm((prevForm: any) => ({
       ...prevForm,
       [name]: value,
     }));
@@ -85,11 +85,24 @@ const TravelCategoryEditView = () => {
             <hr />
             <div className="w-full">
               {form.photo ? (
-                <img
-                  src={"https://taiga.tanuweb.cloud/uploads/" + form.photo}
-                  alt="Аялалын төрөл"
-                  className="w-full aspect-square"
-                />
+                <div className="relative">
+                  <div
+                    className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setForm({
+                        ...form,
+                        photo: null,
+                      });
+                    }}
+                  >
+                    <Trash />
+                  </div>
+                  <img
+                    src={"https://taiga.tanuweb.cloud/uploads/" + form.photo}
+                    alt="Аялалын төрөл"
+                    className="w-full aspect-square"
+                  />
+                </div>
               ) : (
                 <ImageUploader isSquare onFileChange={handleSingleFileChange} />
               )}
