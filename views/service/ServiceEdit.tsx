@@ -35,7 +35,9 @@ const ServiceEditView = () => {
   }, [id]);
 
   const handleFormValue = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { value, name } = e.target;
     setForm({
