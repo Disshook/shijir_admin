@@ -130,7 +130,7 @@ const ServiceEditView = () => {
                     name="title"
                     value={form.title}
                     onChange={handleFormValue}
-                    className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] bg-white"
+                    className="border py-2 pb-24 text-xs lg:text-sm px-4 rounded text-[#162c43] bg-white"
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full lg:w-[50%] p-4">
@@ -142,7 +142,7 @@ const ServiceEditView = () => {
                     name="description"
                     value={form.description}
                     onChange={handleFormValue}
-                    className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] bg-white"
+                    className="border py-2 pb-24 text-xs lg:text-sm px-4 rounded text-[#162c43] bg-white"
                   />
                 </div>
               </div>
