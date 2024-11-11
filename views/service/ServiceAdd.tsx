@@ -92,34 +92,31 @@ const ServiceAddView = () => {
               </span>
             </div>
             <hr />
-            <div className="w-full p-4">
-              <div className="flex  lg:flex-row w-full items-center gap-4">
-                <div className="w-full lg:w-[50%]">
-                  <span className="text-xs lg:text-sm text-[#162c43]">
-                    Үйлчилгээний нэр
-                  </span>
-                  <input
-                    type="text"
-                    name="title"
-                    value={form.title}
-                    onChange={handleFormValue}
-                    className="border py-2 pb-24 text-xs lg:text-sm px-4 rounded text-[#162c43] w-full"
-                    placeholder="Мэдээлэл г.м"
-                  />
-                </div>
-                <div className="w-full lg:w-[50%]">
-                  <span className="text-xs lg:text-sm text-[#162c43]">
-                    Үйлчилгээний тайлбар
-                  </span>
-                  <input
-                    type="text"
-                    name="description"
-                    value={form.description}
-                    onChange={handleFormValue}
-                    className="border py-2 pb-24 text-xs lg:text-sm px-4 rounded text-[#162c43] w-full"
-                    placeholder="Мэдээлэл г.м"
-                  />
-                </div>
+            <div className="w-full p-4 space-y-4">
+              <div className="flex flex-col w-full lg:w-[50%]">
+                <span className="text-xs lg:text-sm text-[#162c43]">
+                  Үйлчилгээний нэр
+                </span>
+                <input
+                  type="text"
+                  name="title"
+                  value={form.title}
+                  onChange={handleFormValue}
+                  className="border py-2 text-xs lg:text-sm px-4 rounded max-w-full text-[#162c43] bg-white"
+                  placeholder="Мэдээлэл г.м"
+                />
+              </div>
+              <div className="flex flex-col w-full lg:w-[50%]">
+                <span className="text-xs lg:text-sm text-[#162c43]">
+                  Үйлчилгээний тайлбар
+                </span>
+                <textarea
+                  name="description"
+                  value={form.description}
+                  onChange={handleFormValue}
+                  className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] bg-white max-w-full h-32 lg:h-40"
+                  placeholder="Мэдээлэл г.м"
+                />
               </div>
             </div>
           </div>
