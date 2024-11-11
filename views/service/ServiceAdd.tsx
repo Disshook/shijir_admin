@@ -93,7 +93,7 @@ const ServiceAddView = () => {
             </div>
             <hr />
             <div className="w-full p-4">
-              <div className="flex flex-col lg:flex-row w-full items-center gap-4">
+              <div className="flex  lg:flex-row w-full items-center gap-4">
                 <div className="w-full lg:w-[50%]">
                   <span className="text-xs lg:text-sm text-[#162c43]">
                     Үйлчилгээний нэр
@@ -103,7 +103,7 @@ const ServiceAddView = () => {
                     name="title"
                     value={form.title}
                     onChange={handleFormValue}
-                    className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] w-full"
+                    className="border py-2 pb-24 text-xs lg:text-sm px-4 rounded text-[#162c43] w-full"
                     placeholder="Мэдээлэл г.м"
                   />
                 </div>
@@ -116,7 +116,7 @@ const ServiceAddView = () => {
                     name="description"
                     value={form.description}
                     onChange={handleFormValue}
-                    className="border py-2 text-xs lg:text-sm px-4 rounded text-[#162c43] w-full"
+                    className="border py-2 pb-24 text-xs lg:text-sm px-4 rounded text-[#162c43] w-full"
                     placeholder="Мэдээлэл г.м"
                   />
                 </div>

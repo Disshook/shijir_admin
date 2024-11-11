@@ -89,12 +89,7 @@ const ServiceList = ({ service }: Props) => {
                     </div>
                   </td>
                   <td className="text-xs lg:text-sm text-start py-2 lg:py-4">
-                    {list.language === "en"
-                      ? "Англи"
-                      : list.language === "kr"
-                      ? "Солонгос"
-                      : "Монгол"}
-                    {list.description}
+                    {list.description.slice(0, 32)}...
                   </td>
                   <td>
                     <div className="flex items-center gap-4">

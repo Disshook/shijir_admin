@@ -53,6 +53,7 @@ const ServiceEditView = () => {
   const onSubmit = () => {
     const formData = new FormData();
     formData.append("title", form.title);
+    formData.append("description", form.description);
     if (cover) {
       formData.append("file", cover);
     }
