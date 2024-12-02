@@ -1,103 +1,71 @@
 "use client";
-import IMGURL from "@/constants/Constants";
-import { Additional } from "@/types/additional";
-import axios from "axios";
+import Image from "next/image";
+import Logo from "@/public/LOGO.svg";
+import Link from "next/link";
 import {
-  Compass,
-  ChartBarStacked,
+  Newspaper,
   Home,
-  Image,
-  Settings,
-  MapPinHouse,
-  Star,
-  MessageCircleQuestion,
-  MessageSquareMore,
-  ListCheck,
   Menu,
   X,
   LogOut,
-  BringToFront,
+  User,
+  NotebookPen,
+  Handshake,
+  BriefcaseBusiness,
 } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function AdminSidebar() {
-  const [additional, setAdditional] = useState<Additional | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const path = usePathname();
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchAdditional = async () => {
-      try {
-        const res = await axios.get(
-          "https://taiga.tanuweb.cloud/api/v1/additional"
-        );
-        setAdditional(res.data.data);
-      } catch (error) {
-        console.error("Error fetching additional data:", error);
-      }
-    };
-
-    fetchAdditional();
-  }, []);
 
   const navLinks = [
     {
       title: "Нүүр хуудас",
       icon: <Home color="#000000" />,
-      path: "https://www.taigatour.mn/",
+      path: "/home",
     },
     {
-      title: "Захиалга",
-      icon: <BringToFront color="#000000" />,
-      path: "/book",
+      title: "Танилцуулга",
+      icon: <User color="#000000" />,
+      path: "/introduction",
+    },
+
+    {
+      title: "Мэдээ",
+      icon: <Newspaper color="#000000" />,
+      path: "/news",
     },
     {
-      title: "Аялал",
-      icon: <Compass color="#000000" />,
-      path: "/travels",
+      title: "Тайлан",
+      icon: <BriefcaseBusiness color="#000000" />,
+      path: "/report",
+    },
+
+    {
+      title: "Хууль нэмэх",
+      icon: <NotebookPen color="#000000" />,
+      path: "/FeedbackEvent",
     },
     {
-      title: "Аялалын төрөл",
-      icon: <ChartBarStacked color="#000000" />,
-      path: "/travel-categories",
+      title: "Хуулийн саналууд",
+      icon: <NotebookPen color="#000000" />,
+      path: "/lawFeedback",
     },
     {
-      title: "Хүрэх газар",
-      icon: <MapPinHouse color="#000000" />,
-      path: "/destinations",
+      title: "Санал хүсэлт",
+      icon: <NotebookPen color="#000000" />,
+      path: "/feedback",
     },
+
     {
-      title: "Баннер",
-      icon: <Image color="#000000" />,
-      path: "/banner",
+      title: "Уулзалт",
+      icon: <Handshake color="#000000" />,
+      path: "/meeting",
     },
-    {
-      title: "Зөвлөмж",
-      icon: <Star color="#000000" />,
-      path: "/tip",
-    },
-    {
-      title: "Үйлчилгээ",
-      icon: <ListCheck color="#000000" />,
-      path: "/service",
-    },
-    {
-      title: "Асуулт, Хариулт",
-      icon: <MessageCircleQuestion color="#000000" />,
-      path: "/faqs",
-    },
-    {
-      title: "Сэтгэгдэл",
-      icon: <MessageSquareMore color="#000000" />,
-      path: "/comment",
-    },
-    {
-      title: "Нэмэлт мэдээлэл",
-      icon: <Settings color="#000000" />,
-      path: "/additional",
-    },
+
     {
       title: "Гарах",
       icon: <LogOut color="#000000" />,
@@ -111,11 +79,9 @@ export default function AdminSidebar() {
       <div className="md:hidden block bg-gray-100 z-20 fixed top-0 w-full">
         {/* Top Bar with Logo and Toggle Button */}
         <div className="flex justify-between items-center px-4 py-3">
-          <img
-            src={IMGURL + additional?.logo}
-            alt="logo"
-            className="rounded w-16 aspect-square object-cover"
-          />
+          <Link href="/" className="flex items-start justify-start text-start">
+            <Image src={Logo} alt="Logo" className=" brightness-50 w-28 h-28" />
+          </Link>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="text-black focus:outline-none"
@@ -159,17 +125,19 @@ export default function AdminSidebar() {
       {/* Sidebar - Visible only on larger screens */}
       <div className={`hidden md:block`}>
         <div
-          className={`fixed top-0 z-50 h-screen bg-[#F8F8F8]  w-64 border-r border-[#E5E5E5] flex flex-col items-center`}
+          className={`fixed top-0 z-50 h-screen bg-[#F8F8F8]  w-[200px] border-r border-[#E5E5E5] flex flex-col items-center`}
         >
-          <div className="flex items-center justify-between mb-6 ">
-            <img
-              src={IMGURL + additional?.logo}
-              alt="logo"
-              className="rounded w-20 aspect-square object-cover"
-            />
-            <h1 className="text-xl font-semibold mx-4">
-              {additional?.company || "Company Name"}
-            </h1>
+          <div className="flex items-start justify-start text-start ">
+            <Link
+              href="/"
+              className="flex items-start justify-start text-start"
+            >
+              <Image
+                src={Logo}
+                alt="Logo"
+                className=" brightness-50 w-28 h-28"
+              />
+            </Link>
           </div>
           {navLinks.map((list, index) => (
             <div

@@ -1,8 +1,9 @@
 export interface BannerModel {
   _id: string;
-  big: string;
-  little: string;
+  title: string;
+  description: string;
   file: string;
-  fileType: "image" | "video";
+  photo: string;
+  textcolor: string;
   createdAt: string;
 }

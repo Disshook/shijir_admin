@@ -1,13 +1,14 @@
 import axios from "axios";
-export const IMGURL = "https://taiga.tanuweb.cloud/uploads";
+export const IMGURL = "http://localhost:8001/uploads/";
 
 // http://localhost:9090/
 
 const axiosInstance = axios.create({
-  baseURL: "https://taiga.tanuweb.cloud/api/v1",
+  baseURL: "http://localhost:8001/api/v1/",
   // baseURL: "http://192.168.0.104:9090/api/v1",
   // timeout: 5000 // Set a timeout for requests (in milliseconds)
 });
+
 
 // Add an interceptor to include the Bearer token in the request headers
 axiosInstance.interceptors.request.use(

@@ -11,7 +11,7 @@ const SignInForm = () => {
     const user = JSON.parse(storageService.get(window, "user"));
 
     if ((token && user?.role == "admin") || user?.role == "operator") {
-      router.push("/book");
+      router.push("/login");
     }
   });
   const [form, setForm] = useState({
@@ -28,7 +28,7 @@ const SignInForm = () => {
 
   const onSignIn = () => {
     axios
-      .post("https://taiga.tanuweb.cloud/api/v1/user/login", {
+      .post("http://localhost:8001/api/v1/user/login", {
         email: form.name,
         password: form.pass,
       })
@@ -36,7 +36,7 @@ const SignInForm = () => {
         alert("Амжилттай");
         storageService.set(window, "user", JSON.stringify(res.data.data));
         storageService.set(window, "token", res.data.token);
-        router.push("/travels");
+        router.push("/home");
       })
       .catch((er) => console.log(er));
   };
@@ -44,7 +44,7 @@ const SignInForm = () => {
     <div className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          Taiga Tour
+          Shijir Admin
         </div>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

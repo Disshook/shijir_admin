@@ -4,8 +4,7 @@ import { redirect } from "next/navigation";
 const Main = () => {
   // ChannelMergerNo
 
-  redirect("/travels");
-  console.log("ghf");
+  redirect("/home");
   return <div></div>;
 };
 
