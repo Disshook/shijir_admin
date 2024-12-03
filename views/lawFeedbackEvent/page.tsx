@@ -17,7 +17,7 @@ const NewsList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:8001/api/v1/lawevent", {
+        const res = await fetch("https://shijir.tanuweb.cloud/api/v1lawevent", {
           cache: "no-store",
         });
 

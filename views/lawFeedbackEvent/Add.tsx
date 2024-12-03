@@ -24,7 +24,7 @@ const AddBanner = () => {
     };
 
     axios
-      .post("http://localhost:8001/api/v1/lawevent", formData, {
+      .post("https://shijir.tanuweb.cloud/api/v1lawevent", formData, {
         headers: {
           "Content-Type": "application/json",
         },

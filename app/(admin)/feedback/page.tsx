@@ -6,7 +6,7 @@ const Feedbacks = async () => {
   let form: Form[] = [];
 
   try {
-    const res = await fetch("http://localhost:8001/api/v1/feedback", {
+    const res = await fetch("https://shijir.tanuweb.cloud/api/v1feedback", {
       cache: "no-store",
     });
 

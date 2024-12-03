@@ -101,7 +101,7 @@ const CreateJournal = () => {
       formData.append("bodyImg", file);
     });
 
-    fetch("http://localhost:8001/api/v1/introduction", {
+    fetch("https://shijir.tanuweb.cloud/api/v1introduction", {
       method: "POST",
       body: formData,
     })

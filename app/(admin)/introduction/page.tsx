@@ -11,7 +11,7 @@ const BannerPage = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8001/api/v1/introduction"
+          "https://shijir.tanuweb.cloud/api/v1introduction"
         );
 
         if (!response.ok) {
