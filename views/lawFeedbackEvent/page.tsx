@@ -1,20 +1,39 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form } from "@/types/form";
 import Link from "next/link";
 import { Trash, Eye } from "lucide-react";
 import axiosInstance from "@/hooks/axios";
 
-interface Props {
-  form: Form[];
-}
-
-const NewsList = ({ form }: Props) => {
+const NewsList = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [formData, setFormData] = useState<Form[]>([]); // State for fetched data
 
   const openImageModal = (imageUrl: string) => {
     setSelectedImage(imageUrl);
   };
+
+  // Fetch data when the component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:8001/api/v1/lawevent", {
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          throw new Error(`Failed to fetch data: ${res.status}`);
+        }
+
+        const data = await res.json();
+        setFormData(data.data); // Set fetched data to state
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array ensures this runs once after initial render
 
   const closeImageModal = () => {
     setSelectedImage(null);
@@ -24,7 +43,6 @@ const NewsList = ({ form }: Props) => {
     if (typeof window !== undefined) {
       if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
         axiosInstance
-
           .delete("lawevent/" + id)
           .then(() => {
             alert("Амжилттай устгагдлаа");
@@ -58,7 +76,7 @@ const NewsList = ({ form }: Props) => {
               Нийт хуулийн санал
             </span>
             <span className="font-semibold text-sm lg:text-lg ml-8">
-              {form?.length}
+              {formData?.length}
             </span>
           </div>
         </div>
@@ -77,7 +95,7 @@ const NewsList = ({ form }: Props) => {
               </tr>
             </thead>
             <tbody>
-              {form?.map((list, index) => (
+              {formData?.map((list, index) => (
                 <tr key={index} className="">
                   <td className="text-xs lg:text-sm text-center  py-2 lg:py-4">
                     {index + 1}
