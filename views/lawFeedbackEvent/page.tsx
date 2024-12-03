@@ -56,8 +56,8 @@ const NewsList = () => {
   return (
     <>
       <div className="w-full border-b-[#e5e5e5] border-b h-20 bg-white flex items-center justify-between sm:px-10 top-0 z-0">
-        <span className="text-[#162C43] text-base font-bold sm:text-lg">
-          Нүүр хэсэг
+        <span className="text-[#162C43] text-base font-bold sm:text-lg ml-4">
+          Хуулийн саналууд
         </span>
 
         <Link

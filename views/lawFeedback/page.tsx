@@ -40,6 +40,9 @@ const FormFeedback = ({ form }: Props) => {
       {/* Content Section */}
       <div className="flex flex-col gap-4 w-full px-4 py-4 lg:px-10 lg:py-10">
         {/* Summary Card */}
+        <span className="text-[#162C43] text-base font-bold sm:text-lg ml-4">
+          Нийт хуулийн төсөлд өгсөн хүмүүсийн саналууд
+        </span>
         <div className="w-full flex items-center justify-between bg-white p-4 rounded-lg border border-[#e5e5e5]">
           <div className="flex flex-col text-[#162C43]">
             <span className="text-xs lg:text-sm text-black/50 font-light">

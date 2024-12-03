@@ -1,5 +1,5 @@
 import { Form } from "@/types/form";
-import LawFeedback from "@/views/lawFeedback/page";
+import Meeting from "@/views/meeting/page";
 import React from "react";
 
 const Page = async () => {
@@ -21,7 +21,7 @@ const Page = async () => {
   }
   return (
     <>
-      <LawFeedback form={form} />
+      <Meeting form={form} />
     </>
   );
 };

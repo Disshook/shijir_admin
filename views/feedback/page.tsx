@@ -2,16 +2,14 @@
 import React, { useState } from "react";
 import { Form } from "@/types/form";
 
+import axios from "axios";
 import { Trash } from "lucide-react";
-import axiosInstance from "@/hooks/axios";
 
 interface Props {
   form: Form[];
 }
 
-const NewsList = ({ form }: Props) => {
-  console.log("object", form);
-
+const Feedbacks = ({ form }: Props) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [formData, setFormData] = useState<Form[]>(form);
   const closeImageModal = () => {
@@ -19,16 +17,15 @@ const NewsList = ({ form }: Props) => {
   };
 
   const handleDelete = (id: string) => {
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
-        axiosInstance
-          .delete("feedback/" + id)
+        axios
+          .delete(`http://localhost:8001/api/v1/feedback/${id}`) // Note the `/id` here
           .then(() => {
             alert("Амжилттай устгагдлаа");
-            // Filter out the deleted item from the formData state
+            // Update the state to reflect the deleted item
             const updatedFormData = formData.filter((item) => item._id !== id);
             setFormData(updatedFormData);
-            console.log("Updated Form Data after deletion:", updatedFormData);
           })
           .catch(() => alert("Алдаа гарлаа"));
       }
@@ -40,10 +37,13 @@ const NewsList = ({ form }: Props) => {
       {/* Content Section */}
       <div className="flex flex-col gap-4 w-full px-4 py-4 lg:px-10 lg:py-10">
         {/* Summary Card */}
+        <span className="text-[#162C43] text-base font-bold sm:text-lg ml-4">
+          Санал хүсэлт
+        </span>
         <div className="w-full flex items-center justify-between bg-white p-4 rounded-lg border border-[#e5e5e5]">
           <div className="flex flex-col text-[#162C43]">
             <span className="text-xs lg:text-sm text-black/50 font-light">
-              Нийт мэдээ
+              Нийт санал
             </span>
             <span className="font-semibold text-sm lg:text-lg ml-8">
               {form?.length}
@@ -137,4 +137,4 @@ const NewsList = ({ form }: Props) => {
   );
 };
 
-export default NewsList;
+export default Feedbacks;

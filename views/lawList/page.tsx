@@ -56,7 +56,7 @@ const FormFeedback = ({ form }: Props) => {
         <div className="w-full flex items-center justify-between bg-white p-4 rounded-lg border border-[#e5e5e5]">
           <div className="flex flex-col text-[#162C43]">
             <span className="text-xs lg:text-sm text-black/50 font-light">
-              Нийт хуулийн санал
+              Нийт энэ төсөлд санал өгсөн хуулийн санал
             </span>
             <span className="font-semibold text-sm lg:text-lg ml-8">
               {filteredForms.length}

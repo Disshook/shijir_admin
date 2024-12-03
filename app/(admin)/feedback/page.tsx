@@ -1,8 +1,8 @@
 import { Form } from "@/types/form";
-import LawFeedback from "@/views/lawFeedback/page";
+import Feedback from "@/views/feedback/page";
 import React from "react";
 
-const Feedback = async () => {
+const Feedbacks = async () => {
   let form: Form[] = [];
 
   try {
@@ -21,9 +21,9 @@ const Feedback = async () => {
   }
   return (
     <>
-      <LawFeedback form={form} />
+      <Feedback form={form} />
     </>
   );
 };
 
-export default Feedback;
+export default Feedbacks;

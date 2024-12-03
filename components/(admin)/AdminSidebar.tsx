@@ -45,12 +45,12 @@ export default function AdminSidebar() {
     },
 
     {
-      title: "Хууль нэмэх",
+      title: "Хуулийн төсөл нэмэх",
       icon: <NotebookPen color="#000000" />,
       path: "/FeedbackEvent",
     },
     {
-      title: "Хуулийн саналууд",
+      title: "Хуулийн төслийн саналууд",
       icon: <NotebookPen color="#000000" />,
       path: "/lawFeedback",
     },
@@ -142,14 +142,14 @@ export default function AdminSidebar() {
           {navLinks.map((list, index) => (
             <div
               key={index}
-              className="flex items-center w-full gap-2 justify-start px-4  cursor-pointer"
+              className="flex items-center w-full gap-2 justify-start px-4 text-start cursor-pointer "
               onClick={() => {
                 setIsSidebarOpen(false);
                 router.push(list.path);
               }}
             >
               <div
-                className={`w-12 h-12 rounded-lg border-[#E5E5E5] bg-white border my-1 flex items-center justify-center ${
+                className={`min-w-12 min-h-12 rounded-lg border-[#E5E5E5] bg-white border my-1 flex items-center justify-center ${
                   path.includes(list.path) ? "border-[#3749E5] font-bold" : ""
                 }`}
               >
