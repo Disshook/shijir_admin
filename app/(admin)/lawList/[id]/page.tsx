@@ -6,7 +6,7 @@ const Page = async () => {
   let form: Form[] = [];
 
   try {
-    const res = await fetch("https://shijir.tanuweb.cloud/api/v1lawevent", {
+    const res = await fetch("https://shijir.tanuweb.cloud/api/v1/lawevent", {
       cache: "no-store",
     });
 

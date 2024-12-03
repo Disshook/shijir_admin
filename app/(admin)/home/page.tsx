@@ -7,7 +7,7 @@ const BannerPage = async () => {
   let bannertext: BannerModel[] = [];
 
   try {
-    const res = await fetch("https://shijir.tanuweb.cloud/api/v1home", {
+    const res = await fetch("https://shijir.tanuweb.cloud/api/v1/home", {
       cache: "no-store",
     });
 

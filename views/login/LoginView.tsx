@@ -28,7 +28,7 @@ const SignInForm = () => {
 
   const onSignIn = () => {
     axios
-      .post("https://shijir.tanuweb.cloud/api/v1user/login", {
+      .post("https://shijir.tanuweb.cloud/api/v1/user/login", {
         email: form.name,
         password: form.pass,
       })
@@ -43,8 +43,8 @@ const SignInForm = () => {
   return (
     <div className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          Shijir Admin
+        <div className="flex items-center mb-6 font-bold text-2xl font-semibold text-gray-900 dark:text-white">
+          Shijir.mn ADMIN
         </div>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

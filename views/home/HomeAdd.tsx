@@ -59,7 +59,7 @@ const AddBanner = () => {
     }
 
     axios
-      .post("https://shijir.tanuweb.cloud/api/v1home", formData)
+      .post("https://shijir.tanuweb.cloud/api/v1/home", formData)
       .then(() => {
         alert("Баннерыг амжилттай нэмлээ!");
         router.push("/home");
