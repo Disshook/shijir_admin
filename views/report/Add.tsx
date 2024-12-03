@@ -51,7 +51,7 @@ export default function ReportsAdmin() {
     setError(null); // Reset error state
 
     try {
-      const res = await fetch("https://shijir.tanuweb.cloud/api/v1report", {
+      const res = await fetch("https://shijir.tanuweb.cloud/api/v1/report", {
         method: "POST",
         body: formData,
       });
@@ -79,7 +79,7 @@ export default function ReportsAdmin() {
     setLoading(true);
     setError(null); // Reset error state
     try {
-      const res = await fetch("https://shijir.tanuweb.cloud/api/v1report");
+      const res = await fetch("https://shijir.tanuweb.cloud/api/v1/report");
       const data = await res.json();
       setReports(data.data); // Assuming `data.data` contains the reports
     } catch {

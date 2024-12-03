@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 const Main = () => {
   // ChannelMergerNo
 
-  redirect("/home");
+  redirect("/login");
   return <div></div>;
 };
 
