@@ -1,12 +1,12 @@
 import { Form } from "@/types/form";
-import LawFeedback from "@/views/lawList/page";
+import LawFeedback from "@/views/allContacts/lawList/page";
 import React from "react";
 
 const Page = async () => {
   let form: Form[] = [];
 
   try {
-    const res = await fetch("https://shijir.tanuweb.cloud/api/v1/lawevent", {
+    const res = await fetch("http://localhost:8001/api/v1/lawevent", {
       cache: "no-store",
     });
 

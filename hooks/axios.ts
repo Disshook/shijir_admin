@@ -1,10 +1,10 @@
 import axios from "axios";
-export const IMGURL = "https://shijir.tanuweb.cloud/uploads/";
+export const IMGURL = "http://localhost:8001/uploads/";
 
 // http://localhost:9090/
 
 const axiosInstance = axios.create({
-  baseURL: "https://shijir.tanuweb.cloud/api/v1/",
+  baseURL: "http://localhost:8001/api/v1/",
   // baseURL: "http://192.168.0.104:9090/api/v1",
   // timeout: 5000 // Set a timeout for requests (in milliseconds)
 });

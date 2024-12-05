@@ -1,12 +1,12 @@
 import { Form } from "@/types/form";
-import Feedback from "@/views/feedback/page";
+import Feedback from "@/views/allContacts/feedback/page";
 import React from "react";
 
 const Feedbacks = async () => {
   let form: Form[] = [];
 
   try {
-    const res = await fetch("https://shijir.tanuweb.cloud/api/v1/feedback", {
+    const res = await fetch("http://localhost:8001/api/v1/feedback", {
       cache: "no-store",
     });
 

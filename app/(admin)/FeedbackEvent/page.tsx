@@ -1,4 +1,4 @@
-import LawFeedbackEvent from "@/views/lawFeedbackEvent/page";
+import LawFeedbackEvent from "@/views/allContacts/lawFeedbackEvent/page";
 import React from "react";
 
 const Page = async () => {

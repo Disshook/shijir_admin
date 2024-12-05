@@ -42,7 +42,7 @@ const NewsList = ({ news, banner }: Props) => {
       if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
         axiosInstance
 
-          .delete("newsbanner/" + id)
+          .delete("videosbanner/" + id)
           .then(() => {
             alert("Амжилттай устгагдлаа");
             window.location.reload();
@@ -57,20 +57,20 @@ const NewsList = ({ news, banner }: Props) => {
       {/* Header Section */}
       <div className="w-full border-b border-[#e5e5e5] h-20 bg-white flex items-center justify-between px-4 lg:px-10 top-0 z-0">
         <span className="text-xs sm:text-sm lg:text-lg text-[#162C43]">
-          Мэдээний жагсаалт
+          Видео мэдээний жагсаалт
         </span>
         <div className="space-x-2 sm:space-x-4">
           <Link
-            href="/news/add"
+            href="/videosnews/add"
             className="px-3 sm:px-4 py-1.5 sm:py-2 rounded text-white bg-[#3749E5] text-xs sm:text-sm cursor-pointer hover:bg-opacity-80 transition-all duration-300"
           >
-            Мэдээ нэмэх
+            Видео мэдээ нэмэх
           </Link>
           <Link
-            href="/news/addBanner"
+            href="/videosnews/addBanner"
             className="px-3 sm:px-4 py-1.5 sm:py-2 rounded text-white bg-[#3749E5] text-xs sm:text-sm cursor-pointer hover:bg-opacity-80 transition-all duration-300"
           >
-            Баннер нэмэх
+            Видео Баннер нэмэх
           </Link>
         </div>
       </div>
@@ -103,7 +103,7 @@ const NewsList = ({ news, banner }: Props) => {
                   </span>
                 </div>
                 <Link
-                  href={"/news/editBanner/" + list._id}
+                  href={"/videosnews/editBanner/" + list._id}
                   className="flex flex-col items-center cursor-pointer"
                 >
                   <Edit size={18} className="cursor-pointer text-orange-500" />
@@ -118,7 +118,7 @@ const NewsList = ({ news, banner }: Props) => {
               </div>
 
               <img
-                src={IMGURL + list.file}
+                src={IMGURL + list.photo}
                 className="w-full h-auto object-cover aspect-video z-0"
                 alt=""
               />
@@ -133,7 +133,7 @@ const NewsList = ({ news, banner }: Props) => {
         <div className="w-full flex items-center justify-between bg-white p-4 rounded-lg border border-[#e5e5e5]">
           <div className="flex flex-col text-[#162C43]">
             <span className="text-xs lg:text-sm text-black/50 font-light">
-              Нийт мэдээ
+              Нийт Видео мэдээ
             </span>
             <span className="font-semibold text-sm lg:text-lg ml-8">
               {news?.length}
@@ -192,7 +192,7 @@ const NewsList = ({ news, banner }: Props) => {
 
                   <td>
                     <div className="flex items-center gap-4">
-                      <Link href={"/news/edit/" + list._id}>
+                      <Link href={"/videosnews/edit/" + list._id}>
                         <Edit
                           color="orange"
                           size={20}

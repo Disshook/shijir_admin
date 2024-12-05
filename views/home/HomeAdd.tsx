@@ -151,9 +151,7 @@ const AddBanner = () => {
 
               <div className="flex gap-2 items-center w-full px-4 pt-4 mb-4">
                 <CircleAlert color="#162c43" />
-                <span className="text-xs text-[#162c43] w-full">
-                  (Зурагын хэмжээ 5 mb - ээс хэтрэхгүй байх ёстой.)
-                </span>
+                <span className="text-xs text-[#162c43] w-full"></span>
               </div>
             </div>
           </div>

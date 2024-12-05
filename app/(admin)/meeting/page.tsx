@@ -1,12 +1,12 @@
 import { Form } from "@/types/form";
-import Meeting from "@/views/meeting/page";
+import Meeting from "@/views/allContacts/meeting/page";
 import React from "react";
 
 const Page = async () => {
   let form: Form[] = [];
 
   try {
-    const res = await fetch("https://shijir.tanuweb.cloud/api/v1/meeting", {
+    const res = await fetch("http://localhost:8001/api/v1/meeting", {
       cache: "no-store",
     });
 

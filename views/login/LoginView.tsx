@@ -28,7 +28,7 @@ const SignInForm = () => {
 
   const onSignIn = () => {
     axios
-      .post("https://shijir.tanuweb.cloud/api/v1/user/login", {
+      .post("http://localhost:8001/api/v1/user/login", {
         email: form.name,
         password: form.pass,
       })

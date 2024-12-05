@@ -17,12 +17,9 @@ const NewsList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          "https://shijir.tanuweb.cloud/api/v1/lawevent",
-          {
-            cache: "no-store",
-          }
-        );
+        const res = await fetch("http://localhost:8001/api/v1/lawevent", {
+          cache: "no-store",
+        });
 
         if (!res.ok) {
           throw new Error(`Failed to fetch data: ${res.status}`);
