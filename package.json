@@ -1,5 +1,5 @@
 {
-  "name": "juulchin",
+  "name": "shijir",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,6 +14,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@headlessui/react": "^2.2.0",
     "@mantine/core": "^7.12.2",
     "@mantine/hooks": "^7.12.2",
     "@prisma/client": "^5.19.1",
@@ -23,7 +24,7 @@
     "flowbite-react": "^0.10.1",
     "lucide-react": "^0.439.0",
     "mantine-datatable": "^7.12.4",
-    "next": "^14.2.18",
+    "next": "^15.0.3",
     "prisma": "^5.19.1",
     "quill": "^2.0.2",
     "quill-image-resize": "^3.0.9",

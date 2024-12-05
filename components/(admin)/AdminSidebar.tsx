@@ -39,6 +39,11 @@ export default function AdminSidebar() {
       path: "/news",
     },
     {
+      title: "Видео мэдээ",
+      icon: <Newspaper color="#000000" />,
+      path: "/videosnews",
+    },
+    {
       title: "Тайлан",
       icon: <BriefcaseBusiness color="#000000" />,
       path: "/report",
@@ -76,11 +81,11 @@ export default function AdminSidebar() {
   return (
     <>
       {/* Mobile Hamburger Menu - Visible only on small screens */}
-      <div className="md:hidden block bg-gray-100 z-20 fixed top-0 w-full">
+      <div className="md:hidden block bg-gray-100 z-20 fixed top-0 w-full ">
         {/* Top Bar with Logo and Toggle Button */}
-        <div className="flex justify-between items-center px-4 py-3">
+        <div className="flex justify-between items-center px-4 py-3 max-h-[80px]">
           <Link href="/" className="flex items-start justify-start text-start">
-            <Image src={Logo} alt="Logo" className=" brightness-50 w-28 h-28" />
+            <Image src={Logo} alt="Logo" className=" brightness-50 w-20 h-20" />
           </Link>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}

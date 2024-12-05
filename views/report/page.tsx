@@ -28,7 +28,7 @@ export default function ReportsAdmin() {
     setLoading(true);
     setError(null); // Reset error state
     try {
-      const res = await fetch("https://shijir.tanuweb.cloud/api/v1/report");
+      const res = await fetch("http://localhost:8001/api/v1/report");
       const data = await res.json();
       setReports(data.data); // Assuming `data.data` contains the reports
     } catch (error) {

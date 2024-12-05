@@ -20,7 +20,7 @@ const Feedbacks = ({ form }: Props) => {
     if (typeof window !== "undefined") {
       if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
         axios
-          .delete(`https://shijir.tanuweb.cloud/api/v1/feedback/${id}`) // Note the `/id` here
+          .delete(`http://localhost:8001/api/v1/feedback/${id}`) // Note the `/id` here
           .then(() => {
             alert("Амжилттай устгагдлаа");
             // Update the state to reflect the deleted item
