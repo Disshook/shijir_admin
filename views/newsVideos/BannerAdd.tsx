@@ -89,7 +89,7 @@ const AddBanner = () => {
     };
 
     axios
-      .post("http://localhost:8001/api/v1/videosbanner", formData, {
+      .post("https://shijirback.tanuweb.cloud/api/v1/videosbanner", formData, {
         onUploadProgress,
       })
       .then(() => {
