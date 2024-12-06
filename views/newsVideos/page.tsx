@@ -28,7 +28,7 @@ const NewsList = ({ news, banner }: Props) => {
       if (window.confirm("Та устгахдаа итгэлтэй байна уу")) {
         axiosInstance
 
-          .delete("news/" + id)
+          .delete("videos/" + id)
           .then(() => {
             alert("Амжилттай устгагдлаа");
             window.location.reload();

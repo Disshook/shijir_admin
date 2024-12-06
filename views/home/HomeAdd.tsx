@@ -40,6 +40,13 @@ const AddBanner = () => {
       [name]: value,
     });
   };
+  const handleRemoveImage = () => {
+    setCover(null); // Reset the cover image to allow a new image upload
+    setForm((prevForm: typeof form) => ({
+      ...prevForm,
+      file: "", // Reset the file URL in the form
+    }));
+  };
   const handleColorChange = (newColor: string) => {
     setForm((prevForm: BannerForm) => ({
       ...prevForm,
@@ -59,7 +66,7 @@ const AddBanner = () => {
     }
 
     axios
-      .post("https://shijir.tanuweb.cloud/api/v1/home", formData)
+      .post("https://shijirback.tanuweb.cloud/api/v1/home", formData)
       .then(() => {
         alert("Баннерыг амжилттай нэмлээ!");
         router.push("/home");
@@ -140,6 +147,12 @@ const AddBanner = () => {
                       alt="news"
                       className="w-full aspect-square object-cover max-h-[400px] p-12"
                     />
+                    <button
+                      onClick={handleRemoveImage}
+                      className="text-red-500 absolute right-8 bottom-6"
+                    >
+                      Устгах
+                    </button>
                   </div>
                 ) : (
                   <ImageUploader
@@ -147,11 +160,6 @@ const AddBanner = () => {
                     onFileChange={handleSingleFileChange}
                   />
                 )}
-              </div>
-
-              <div className="flex gap-2 items-center w-full px-4 pt-4 mb-4">
-                <CircleAlert color="#162c43" />
-                <span className="text-xs text-[#162c43] w-full"></span>
               </div>
             </div>
           </div>

@@ -134,7 +134,7 @@ const NewsEditView = () => {
     setCover(null); // Reset the cover image to allow a new image upload
     setForm((prevForm) => ({
       ...prevForm,
-      file: "", // Reset the file URL in the form
+      photo: "", // Reset the file URL in the form
     }));
   };
 

@@ -51,10 +51,13 @@ export default function ReportsAdmin() {
     setError(null); // Reset error state
 
     try {
-      const res = await fetch("http://localhost:8001/api/v1/report", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        "https://shijirback.tanuweb.cloud/api/v1/report",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (res.ok) {
         alert("Таны тайланг амжилттай нэмлээ");
@@ -79,7 +82,7 @@ export default function ReportsAdmin() {
     setLoading(true);
     setError(null); // Reset error state
     try {
-      const res = await fetch("http://localhost:8001/api/v1/report");
+      const res = await fetch("https://shijirback.tanuweb.cloud/api/v1/report");
       const data = await res.json();
       setReports(data.data); // Assuming `data.data` contains the reports
     } catch {
