@@ -65,7 +65,7 @@ export default function ReportsAdmin() {
         setYear(""); // Reset year input
         setMonths([]); // Reset months
         fetchReports(); // Refresh the reports table
-        router.push("/FeedbackEvent");
+        router.push("/report");
       } else {
         const err = await res.json();
         alert("Error uploading file: " + err.message);
