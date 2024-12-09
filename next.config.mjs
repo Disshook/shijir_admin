@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ["shijir.tanuweb.cloud", "localhost",],
+    domains: ["shijirback.tanuweb.cloud", "localhost",],
     
   },
 };
