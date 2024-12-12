@@ -1,11 +1,14 @@
 "use client";
 import React, { useState, Fragment } from "react";
 import axios from "axios";
-import { CircleAlert } from "lucide-react";
-import ImageUploader from "@/components/(admin)/ImageUploader";
 import FileUpload from "@/components/FileUpload";
 import { useRouter } from "next/navigation";
 import { Dialog, Transition } from "@headlessui/react";
+import ImageUploader from "@/components/(admin)/ImageUploader";
+const Froala = dynamic(() => import("@/components/Froala/Froala"), {
+  ssr: false,
+});
+import dynamic from "next/dynamic";
 
 const AddBanner = () => {
   const [loadingVideo, setLoadingVideo] = useState(false);
@@ -36,6 +39,17 @@ const AddBanner = () => {
       [name]: value,
     });
   };
+
+  const [editorContent1, setEditorContent1] = useState("");
+  const [editorContent2, setEditorContent2] = useState("");
+
+  const onEditorChange1 = (data: string) => {
+    setEditorContent1(data);
+  };
+  const onEditorChange2 = (data: string) => {
+    setEditorContent2(data);
+  };
+
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
 
@@ -56,14 +70,14 @@ const AddBanner = () => {
   };
 
   const onSubmit = () => {
-    if (!form.title || !form.description) {
+    if (!editorContent1 || !editorContent2) {
       alert("Гарчиг болон тайлбар оруулна уу.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("description", form.description);
-    formData.append("title", form.title);
+    formData.append("description", editorContent2);
+    formData.append("title", editorContent1);
     if (cover) {
       formData.append("photo", cover);
     }
@@ -125,13 +139,9 @@ const AddBanner = () => {
                     <span className="text-sm">{form.title.length}/100</span>
                   </div>
                 </label>
-                <input
-                  type="text"
-                  maxLength={100}
-                  name="title"
-                  value={form.title}
-                  onChange={handleFormValue}
-                  className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
+                <Froala
+                  onValueChange={onEditorChange1}
+                  value={editorContent1}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -140,15 +150,9 @@ const AddBanner = () => {
                     <span>Тайлбар</span>
                   </div>
                 </label>
-                <textarea
-                  name="description"
-                  value={form.description}
-                  onChange={handleFormValue}
-                  className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
-                  style={{
-                    minHeight: "150px",
-                    resize: "vertical",
-                  }}
+                <Froala
+                  onValueChange={onEditorChange2}
+                  value={editorContent2}
                 />
               </div>
 

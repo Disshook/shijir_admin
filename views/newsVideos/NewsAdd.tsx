@@ -1,11 +1,14 @@
 "use client";
 import React, { useState, Fragment } from "react";
 import axios from "axios";
-import { CircleAlert } from "lucide-react";
 import ImageUploader from "@/components/(admin)/ImageUploader";
 import FileUpload from "@/components/FileUpload";
 import { useRouter } from "next/navigation";
 import { Dialog, Transition } from "@headlessui/react";
+const Froala = dynamic(() => import("@/components/Froala/Froala"), {
+  ssr: false,
+});
+import dynamic from "next/dynamic";
 
 const AddBanner = () => {
   const [loadingVideo, setLoadingVideo] = useState(false);
@@ -15,8 +18,8 @@ const AddBanner = () => {
   const [modal1, setModal1] = useState(false);
 
   const [form, setForm] = useState<any>({
-    title: "",
-    description: "",
+    editorContent1: "",
+    editorContent2: "",
     fileType: "image",
     video: null,
     isSpecial: false,
@@ -28,14 +31,14 @@ const AddBanner = () => {
     setCover(file); // Update state with the new file
   };
 
-  const handleFormValue = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { value, name } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
+  const [editorContent1, setEditorContent1] = useState("");
+  const [editorContent2, setEditorContent2] = useState("");
+
+  const onEditorChange1 = (data: string) => {
+    setEditorContent1(data);
+  };
+  const onEditorChange2 = (data: string) => {
+    setEditorContent2(data);
   };
 
   const handleRemoveImage = () => {
@@ -66,14 +69,14 @@ const AddBanner = () => {
   };
 
   const onSubmit = () => {
-    if (!form.title || !form.description) {
+    if (!editorContent1 || !editorContent2) {
       alert("Гарчиг болон тайлбар оруулна уу.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("description", form.description);
-    formData.append("title", form.title);
+    formData.append("description", editorContent2);
+    formData.append("title", editorContent1);
     formData.append("isSpecial", form.isSpecial);
     if (cover) {
       formData.append("photo", cover);
@@ -133,16 +136,11 @@ const AddBanner = () => {
                 <label className="text-sm sm:text-base text-[#162c43]">
                   <div className="w-full flex items-center justify-between">
                     <span>Гарчиг</span>
-                    <span className="text-sm">{form.title.length}/100</span>
                   </div>
                 </label>
-                <input
-                  type="text"
-                  maxLength={100}
-                  name="title"
-                  value={form.title}
-                  onChange={handleFormValue}
-                  className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
+                <Froala
+                  onValueChange={onEditorChange1}
+                  value={editorContent1}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -151,15 +149,9 @@ const AddBanner = () => {
                     <span>Тайлбар</span>
                   </div>
                 </label>
-                <textarea
-                  name="description"
-                  value={form.description}
-                  onChange={handleFormValue}
-                  className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
-                  style={{
-                    minHeight: "100px",
-                    resize: "vertical",
-                  }}
+                <Froala
+                  onValueChange={onEditorChange2}
+                  value={editorContent2}
                 />
               </div>
               <label className="mt-4 inline-flex items-center font-bold">
