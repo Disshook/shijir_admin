@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+const Froala = dynamic(() => import("@/components/Froala/Froala"), {
+  ssr: false,
+});
+import dynamic from "next/dynamic";
 
 const AddBanner = () => {
   const router = useRouter();
@@ -15,14 +19,15 @@ const AddBanner = () => {
 
   const [cover, setCover] = useState<File | null>(null);
 
-  const handleFormValue = (e: any) => {
-    const { value, name } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
+  const [editorContent1, setEditorContent1] = useState("");
+  const [editorContent2, setEditorContent2] = useState("");
 
+  const onEditorChange1 = (data: string) => {
+    setEditorContent1(data);
+  };
+  const onEditorChange2 = (data: string) => {
+    setEditorContent2(data);
+  };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setCover(e.target.files[0]);
@@ -31,8 +36,8 @@ const AddBanner = () => {
 
   const onSubmit = () => {
     const formData = new FormData();
-    formData.append("description", form.little);
-    formData.append("title", form.big);
+    formData.append("description", form.editorContent2);
+    formData.append("title", form.editorContent1);
     formData.append("isSpecial", form.isSpecial);
 
     if (cover) {
@@ -66,31 +71,14 @@ const AddBanner = () => {
             <label className="text-sm sm:text-base text-[#162c43]">
               Гарчиг
             </label>
-            <input
-              type="text"
-              name="big"
-              value={form.big}
-              onChange={handleFormValue}
-              className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
-            />
+            <Froala onValueChange={onEditorChange1} value={editorContent1} />
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label className="text-sm sm:text-base text-[#162c43]">
                 Тайлбар
               </label>
-              <textarea
-                name="little"
-                value={form.little}
-                onChange={handleFormValue}
-                className="border text-xs sm:text-sm px-4 py-2 rounded bg-white text-[#162c43]"
-                style={{
-                  minHeight: "150px", // Minimum height for the textarea
-                  resize: "vertical", // Allow resizing vertically
-                  verticalAlign: "top", // Align text to the top
-                  paddingTop: "10px", // Adjust padding for more top space if needed
-                }}
-              />
+              <Froala onValueChange={onEditorChange2} value={editorContent2} />
             </div>
             <label className="mt-4 inline-flex items-center font-bold">
               <input

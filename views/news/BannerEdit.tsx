@@ -5,14 +5,19 @@ import ImageUploader from "@/components/(admin)/ImageUploader";
 import { useRouter, useParams } from "next/navigation";
 import { IMGURL } from "@/hooks/axios";
 import axiosInstance from "@/hooks/axios";
+import dynamic from "next/dynamic";
+
+const Froala = dynamic(() => import("@/components/Froala/Froala"), {
+  ssr: false,
+});
 
 const NewsEditView = () => {
   const [single, setSingle] = useState(null);
   const { id } = useParams();
   const router = useRouter();
   const [form, setForm] = useState({
-    description: "",
-    title: "",
+    editorContent2: "",
+    editorContent1: "",
     file: "", // Image URL from the server
   });
 
@@ -25,15 +30,26 @@ const NewsEditView = () => {
           const newsData = res.data.data;
           setSingle(newsData);
           setForm({
-            description: newsData.description,
-            title: newsData.title,
+            editorContent1: newsData.title || "", // Ensure editorContent1 is a string
+            editorContent2: newsData.description || "",
             file: newsData.file,
           });
+          setEditorContent1(newsData.title || "");
+          setEditorContent2(newsData.description || "");
         })
         .catch((err) => console.error("Error fetching home:", err));
     }
   }, [id]);
 
+  const [editorContent1, setEditorContent1] = useState("");
+  const [editorContent2, setEditorContent2] = useState("");
+
+  const onEditorChange1 = (data: string) => {
+    setEditorContent1(data);
+  };
+  const onEditorChange2 = (data: string) => {
+    setEditorContent2(data);
+  };
   const handleFormValue = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -54,8 +70,8 @@ const NewsEditView = () => {
   // Submit form with updated data
   const onSubmit = () => {
     const formData = new FormData();
-    formData.append("title", form.title);
-    formData.append("description", form.description);
+    formData.append("title", form.editorContent1);
+    formData.append("description", form.editorContent2);
     // If there's a new image, append it to the form data
     if (cover) {
       formData.append("file", cover);
@@ -99,16 +115,11 @@ const NewsEditView = () => {
                   <label className="text-sm sm:text-base text-[#162c43]">
                     <div className="w-full flex items-center justify-between">
                       <span>Гарчиг</span>
-                      <span className="text-sm">{form.title?.length}/100</span>
                     </div>
                   </label>
-                  <input
-                    type="text"
-                    name="title"
-                    maxLength={100}
-                    value={form.title}
-                    onChange={handleFormValue}
-                    className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
+                  <Froala
+                    onValueChange={onEditorChange1}
+                    value={editorContent1}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full ">
@@ -116,12 +127,9 @@ const NewsEditView = () => {
                     <span> Тайлбар</span>
                     <span className="text-sm"></span>
                   </div>
-                  <input
-                    type="text"
-                    name="description"
-                    value={form.description}
-                    onChange={handleFormValue}
-                    className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
+                  <Froala
+                    onValueChange={onEditorChange2}
+                    value={editorContent2}
                   />
                 </div>
 

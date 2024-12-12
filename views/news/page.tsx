@@ -181,12 +181,16 @@ const NewsList = ({ news, banner }: Props) => {
                   </td>
                   <td>
                     <span className="text-xs lg:text-sm line-clamp-1">
-                      {list.title}
+                      <div
+                        dangerouslySetInnerHTML={{ __html: list.description }}
+                      />
                     </span>
                   </td>
                   <td>
                     <span className="text-xs lg:text-sm line-clamp-2 w-[500px]">
-                      {list.description}
+                      <div
+                        dangerouslySetInnerHTML={{ __html: list.description }}
+                      />
                     </span>
                   </td>
 

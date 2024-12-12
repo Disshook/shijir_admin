@@ -2,8 +2,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { CircleAlert } from "lucide-react";
 import ImageUploader from "@/components/(admin)/ImageUploader";
+const Froala = dynamic(() => import("@/components/Froala/Froala"), {
+  ssr: false,
+});
+import dynamic from "next/dynamic";
 
 const AddBanner = () => {
   const router = useRouter();
@@ -18,18 +21,21 @@ const AddBanner = () => {
   const handleSingleFileChange = (file: File | null) => {
     setCover(file); // Update state with the new file
   };
-  const handleFormValue = (e: any) => {
-    const { value, name } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
+
+  const [editorContent1, setEditorContent1] = useState("");
+  const [editorContent2, setEditorContent2] = useState("");
+
+  const onEditorChange1 = (data: string) => {
+    setEditorContent1(data);
+  };
+  const onEditorChange2 = (data: string) => {
+    setEditorContent2(data);
   };
 
   const onSubmit = () => {
     const formData = new FormData();
-    formData.append("description", form.description);
-    formData.append("title", form.title);
+    formData.append("description", form.editorContent1);
+    formData.append("title", form.editorContent2);
 
     if (cover) {
       formData.append("file", cover);
@@ -56,20 +62,15 @@ const AddBanner = () => {
         <div className="w-[50%] bg-white border p-4 rounded-lg">
           <div className="flex flex-col gap-4">
             <div className="w-full flex flex-col  relative">
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 mb-4">
                 <label className="text-sm sm:text-base text-[#162c43]">
                   <div className="w-full flex items-center justify-between">
                     <span>Гарчиг</span>
-                    <span className="text-sm">{form.title?.length}/100</span>
                   </div>
                 </label>
-                <input
-                  type="text"
-                  maxLength={100}
-                  name="title"
-                  value={form.title}
-                  onChange={handleFormValue}
-                  className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
+                <Froala
+                  onValueChange={onEditorChange1}
+                  value={editorContent1}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -79,15 +80,9 @@ const AddBanner = () => {
                     <span className="text-sm"></span>
                   </div>
                 </label>
-                <textarea
-                  name="description"
-                  value={form.description}
-                  onChange={handleFormValue}
-                  className="border py-2 text-xs sm:text-sm px-4 rounded bg-white text-[#162c43]"
-                  style={{
-                    minHeight: "150px", // Minimum height for the textarea
-                    resize: "vertical", // Allow resizing vertically
-                  }}
+                <Froala
+                  onValueChange={onEditorChange2}
+                  value={editorContent2}
                 />
               </div>
 
@@ -113,11 +108,6 @@ const AddBanner = () => {
                     onFileChange={handleSingleFileChange}
                   />
                 )}
-              </div>
-
-              <div className="flex gap-2 items-center w-full px-4 pt-4 mb-4">
-                <CircleAlert color="#162c43" />
-                <span className="text-xs text-[#162c43] w-full"></span>
               </div>
             </div>
           </div>
