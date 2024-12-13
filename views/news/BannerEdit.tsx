@@ -70,8 +70,8 @@ const NewsEditView = () => {
   // Submit form with updated data
   const onSubmit = () => {
     const formData = new FormData();
-    formData.append("title", form.editorContent1);
-    formData.append("description", form.editorContent2);
+    formData.append("title", editorContent1);
+    formData.append("description", editorContent2);
     // If there's a new image, append it to the form data
     if (cover) {
       formData.append("file", cover);

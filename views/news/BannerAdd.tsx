@@ -34,8 +34,8 @@ const AddBanner = () => {
 
   const onSubmit = () => {
     const formData = new FormData();
-    formData.append("description", form.editorContent1);
-    formData.append("title", form.editorContent2);
+    formData.append("description", editorContent1);
+    formData.append("title", editorContent2);
 
     if (cover) {
       formData.append("file", cover);
