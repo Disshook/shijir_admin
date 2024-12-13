@@ -84,12 +84,24 @@ const NewsList = ({ news, banner }: Props) => {
             >
               <div className="absolute bottom-0 right-4 p-6 z-0 text-right">
                 <span className="text-[#58CFF4] text-[10px] w-[100%] font-bold line-clamp-3">
-                  {list?.title}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: list.title.replace(
+                        '\u003EPowered by \u003Ca href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor"\u003EFroala Editor\u003C/a\u003E\u003C/p\u003E',
+                        ""
+                      ),
+                    }}
+                  />
                   <br />
                 </span>
                 <span className="text-[6px] text-white w-full mt-4 font-inter line-clamp-3">
                   <div
-                    dangerouslySetInnerHTML={{ __html: list?.description }}
+                    dangerouslySetInnerHTML={{
+                      __html: list?.description.replace(
+                        '\u003EPowered by \u003Ca href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor"\u003EFroala Editor\u003C/a\u003E\u003C/p\u003E',
+                        ""
+                      ),
+                    }}
                   />
                 </span>
               </div>
@@ -184,14 +196,24 @@ const NewsList = ({ news, banner }: Props) => {
                   <td>
                     <span className="text-xs lg:text-sm line-clamp-1">
                       <div
-                        dangerouslySetInnerHTML={{ __html: list.description }}
+                        dangerouslySetInnerHTML={{
+                          __html: list.title.replace(
+                            '\u003EPowered by \u003Ca href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor"\u003EFroala Editor\u003C/a\u003E\u003C/p\u003E',
+                            ""
+                          ),
+                        }}
                       />
                     </span>
                   </td>
                   <td>
                     <span className="text-xs lg:text-sm line-clamp-2 w-[500px]">
                       <div
-                        dangerouslySetInnerHTML={{ __html: list.description }}
+                        dangerouslySetInnerHTML={{
+                          __html: list.description.replace(
+                            '\u003EPowered by \u003Ca href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor"\u003EFroala Editor\u003C/a\u003E\u003C/p\u003E',
+                            ""
+                          ),
+                        }}
                       />
                     </span>
                   </td>
