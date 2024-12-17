@@ -12,6 +12,7 @@ const AddBanner = () => {
   const router = useRouter();
   const [form, setForm] = useState<any>({
     little: "",
+    createdAt: "",
     big: "",
     fileType: "image",
     file: null,
@@ -31,11 +32,18 @@ const AddBanner = () => {
   const onEditorChange2 = (data: string) => {
     setEditorContent2(data);
   };
-
+  const handleFormValue = (e: any) => {
+    const { value, name } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
   const onSubmit = () => {
     const formData = new FormData();
     formData.append("description", editorContent1);
     formData.append("title", editorContent2);
+    formData.append("createdAt", form.createdAt);
 
     if (cover) {
       formData.append("file", cover);
@@ -109,6 +117,19 @@ const AddBanner = () => {
                   />
                 )}
               </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm sm:text-base text-[#162c43]">
+                <div className="w-full flex items-center justify-between">
+                  <span>Он сар оруулах</span>
+                </div>
+              </label>
+              <textarea
+                name="createdAt"
+                value={form.createdAt}
+                onChange={handleFormValue}
+                className="border border-gray-200 rounded py-1 px-4 bg-[#F7FAFB] outline-none"
+              />
             </div>
           </div>
           <div className="py-4">

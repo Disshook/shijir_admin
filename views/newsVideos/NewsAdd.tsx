@@ -20,6 +20,7 @@ const AddBanner = () => {
   const [form, setForm] = useState<any>({
     editorContent1: "",
     editorContent2: "",
+    createdAt: "",
     fileType: "image",
     video: null,
     isSpecial: false,
@@ -48,7 +49,13 @@ const AddBanner = () => {
       file: "", // Reset the file URL in the form
     }));
   };
-
+  const handleFormValue = (e: any) => {
+    const { value, name } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
 
@@ -77,6 +84,7 @@ const AddBanner = () => {
     const formData = new FormData();
     formData.append("description", editorContent2);
     formData.append("title", editorContent1);
+    formData.append("createdAt", form.createdAt);
     formData.append("isSpecial", form.isSpecial);
     if (cover) {
       formData.append("photo", cover);
@@ -204,6 +212,19 @@ const AddBanner = () => {
                 <FileUpload onchange={handleFileUpload} />
               )}
             </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className="text-sm sm:text-base text-[#162c43]">
+              <div className="w-full flex items-center justify-between">
+                <span>Он сар оруулах</span>
+              </div>
+            </label>
+            <textarea
+              name="createdAt"
+              value={form.createdAt}
+              onChange={handleFormValue}
+              className="border border-gray-200 rounded py-1 px-4 bg-[#F7FAFB] outline-none"
+            />
           </div>
           <div className="py-4">
             <button

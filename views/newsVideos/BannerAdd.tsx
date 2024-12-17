@@ -19,6 +19,7 @@ const AddBanner = () => {
 
   const [form, setForm] = useState<any>({
     title: "",
+    createdAt: "",
     description: "",
     fileType: "image",
     video: null,
@@ -77,6 +78,7 @@ const AddBanner = () => {
 
     const formData = new FormData();
     formData.append("description", editorContent2);
+    formData.append("createdAt", form.createdAt);
     formData.append("title", editorContent1);
     if (cover) {
       formData.append("photo", cover);
@@ -187,6 +189,19 @@ const AddBanner = () => {
                 <FileUpload onchange={handleFileUpload} />
               )}
             </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className="text-sm sm:text-base text-[#162c43]">
+              <div className="w-full flex items-center justify-between">
+                <span>Он сар оруулах</span>
+              </div>
+            </label>
+            <textarea
+              name="createdAt"
+              value={form.createdAt}
+              onChange={handleFormValue}
+              className="border border-gray-200 rounded py-1 px-4 bg-[#F7FAFB] outline-none"
+            />
           </div>
           <div className="py-4">
             <button
