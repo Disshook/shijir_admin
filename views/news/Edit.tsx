@@ -115,7 +115,7 @@ const NewsEditView = () => {
             <hr />
             <div className="w-full p-10">
               <div className="flex md:flex-col sm:flex-row gap-4">
-                <div className="flex flex-col gap-2 w-full md:w-[50%]">
+                <div className="flex flex-col gap-2 w-full md:w-[100%]">
                   <label className="text-xs sm:text-sm text-[#162c43]">
                     Гарчиг
                   </label>
@@ -124,7 +124,7 @@ const NewsEditView = () => {
                     value={editorContent1}
                   />
                 </div>
-                <div className="flex flex-col gap-2 w-full md:w-[50%]">
+                <div className="flex flex-col gap-2 w-full md:w-[100%]">
                   <label className="text-xs sm:text-sm text-[#162c43]">
                     Тайлбар
                   </label>
