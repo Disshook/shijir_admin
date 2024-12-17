@@ -23,6 +23,7 @@ const NewsEditView = () => {
   const [form, setForm] = useState({
     editorContent2: "",
     editorContent1: "",
+    createdAt: "",
     photo: "", // Image URL from the server
     video: null as File | null, // Image URL from the server
   });
@@ -38,10 +39,12 @@ const NewsEditView = () => {
           setForm({
             editorContent1: newsData.title || "", // Ensure editorContent1 is a string
             editorContent2: newsData.description || "",
+            createdAt: newsData.createdAt || "",
             photo: newsData.photo ? `${IMGURL}/${newsData.photo}` : "",
             video: newsData.video,
           });
           setEditorContent1(newsData.title || "");
+          setEditorContent1(newsData.createdAt || "");
           setEditorContent2(newsData.description || "");
         })
         .catch((err) => console.error("Error fetching BannerVideos:", err));
@@ -57,7 +60,13 @@ const NewsEditView = () => {
   const onEditorChange2 = (data: string) => {
     setEditorContent2(data);
   };
-
+  const handleFormValue = (e: any) => {
+    const { value, name } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
   // Handle newly uploaded image
   const [cover, setCover] = useState<File | null>(null);
 
@@ -220,7 +229,19 @@ const NewsEditView = () => {
                     <FileUpload onchange={handleFileUpload} />
                   )}
                 </div>
-
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm sm:text-base text-[#162c43]">
+                    <div className="w-full flex items-center justify-between">
+                      <span>Он сар оруулах</span>
+                    </div>
+                  </label>
+                  <textarea
+                    name="createdAt"
+                    value={form.createdAt}
+                    onChange={handleFormValue}
+                    className="border border-gray-200 rounded py-1 px-4 bg-[#F7FAFB] outline-none"
+                  />
+                </div>
                 {/* Submit Button */}
                 <div
                   className="px-3 sm:px-4 mt-4 py-1 sm:py-2 rounded text-white bg-[#3749E5] cursor-pointer hover:bg-opacity-80 transition-all duration-300 text-sm sm:text-base"

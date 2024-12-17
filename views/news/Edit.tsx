@@ -18,6 +18,7 @@ const NewsEditView = () => {
   const [form, setForm] = useState({
     editorContent2: "",
     editorContent1: "",
+    createdAt: "",
     photo: "", // Image URL from the server
     isSpecial: false, // Add the isSpecial field to the form state
   });
@@ -33,9 +34,11 @@ const NewsEditView = () => {
           setForm({
             editorContent1: newsData.title || "", // Ensure editorContent1 is a string
             editorContent2: newsData.description || "",
+            createdAt: newsData.createdAt || "",
             photo: newsData.photo,
             isSpecial: newsData.isSpecial,
           });
+          setEditorContent1(newsData.createdAt || "");
           setEditorContent1(newsData.title || "");
           setEditorContent2(newsData.description || "");
         })
@@ -52,9 +55,7 @@ const NewsEditView = () => {
   const onEditorChange2 = (data: string) => {
     setEditorContent2(data);
   };
-  const handleFormValue = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleFormValue = (e: any) => {
     const { value, name } = e.target;
     setForm({
       ...form,
@@ -75,6 +76,7 @@ const NewsEditView = () => {
     formData.append("description", editorContent2);
     formData.append("title", editorContent1);
     formData.append("isSpecial", form.isSpecial.toString());
+    formData.append("createdAt", form.createdAt);
 
     // If there's a new image, append it to the form data
     if (cover) {
@@ -190,13 +192,20 @@ const NewsEditView = () => {
                       />
                     )}
                   </div>
-
-                  <div className="flex gap-2 items-center w-full px-4 pt-4">
-                    <CircleAlert color="#162c43" />
-                    <span className="text-xs text-[#162c43] w-full"></span>
-                  </div>
                 </div>
-
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm sm:text-base text-[#162c43]">
+                    <div className="w-full flex items-center justify-between">
+                      <span>Он сар оруулах</span>
+                    </div>
+                  </label>
+                  <textarea
+                    name="createdAt"
+                    value={form.createdAt}
+                    onChange={handleFormValue}
+                    className="border border-gray-200 rounded py-1 px-4 bg-[#F7FAFB] outline-none"
+                  />
+                </div>
                 {/* Submit Button */}
                 <div
                   className="px-3 sm:px-4 py-1 sm:py-2 rounded text-white bg-[#3749E5] cursor-pointer hover:bg-opacity-80 transition-all duration-300 text-sm sm:text-base"
